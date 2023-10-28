@@ -27,14 +27,14 @@ def selectColumns(df: pd.DataFrame) -> tuple:
 #Testing
 if __name__ == "__main__":
     
-    dataFrameCSV = readCSV("housing.csv")
+    dataFrameCSV = readCSV("data/housing.csv")
 
     columnX, columnY = selectColumns(dataFrameCSV)
 
     print(columnX, '|', columnY)
    
     
-    dataFrameExcel = readExcel("housing.xlsx")
+    dataFrameExcel = readExcel("data/housing.xlsx")
 
     columnX, columnY = selectColumns(dataFrameExcel)
 

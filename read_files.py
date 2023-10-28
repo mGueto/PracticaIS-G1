@@ -16,10 +16,10 @@ def readExcel(path:str) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    dataFrameCSV = readCSV("housing.csv")
+    dataFrameCSV = readCSV("data/housing.csv")
 
     print(dataFrameCSV)
 
-    dataFrameEXCEL = readExcel("housing.xlsx")
+    dataFrameEXCEL = readExcel("data/housing.xlsx")
 
     print(dataFrameEXCEL)
