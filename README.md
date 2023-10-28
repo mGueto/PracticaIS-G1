@@ -2,7 +2,7 @@
 
 ## Overview
 
-This application is designed to assist you in creating, visualizing, saving, and loading linear regression models. You can work with data stored in CSV, Excel files and databases. The application also enables you to make predictions using the trained models.
+This application is designed to assist you in creating, visualizing, saving, and loading linear regression models. You can work with data stored in CSV and Excel files and databases. The application also enables you to make predictions using the trained models.
 
 ## Code Style and Conventions
 
