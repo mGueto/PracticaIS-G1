@@ -21,6 +21,6 @@ When contributing to this Application, you must follow this code style and conve
 
  **Language:**
    - Use English for the code and comments.
-   - Use Spanish for the elements displayed in the GUI.
+   - Use Spanish for the elements displayed in the GUI and the documentation files.
 
 
