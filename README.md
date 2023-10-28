@@ -1,4 +1,4 @@
-# Practica IS - Grupo 1
+# Practica IS | Grupo 1
 
 ## Overview
 
