@@ -9,7 +9,7 @@ This application is designed to assist you in creating, visualizing, saving, and
 When contributing to this Application, you must follow this code style and conventions:
 
 **Programming Language:**
-    - Python
+   - Python
    
 
 **Naming Conventions:**
