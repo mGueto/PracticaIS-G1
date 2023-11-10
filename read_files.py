@@ -15,13 +15,14 @@ def readExcel(path:str) -> pd.DataFrame:
     Pandas dataframe """
     return pd.read_excel(path)
 
-def readSQL(tableName:str, path:str) -> pd.DataFrame:
+def readSQL(path:str) -> pd.DataFrame:
     """Input: 
     tableName: name of the table containing the dataset
     path: db file path
        Output: 
     Pandas dataframe """
     engine = sql.connect(path)
+    tableName = (pd.read_sql_query("SELECT * FROM sqlite_master WHERE type = 'table'", engine))['name'][0]
     return pd.read_sql_query(f"SELECT * FROM {tableName}", engine)
 
 if __name__ == "__main__":
@@ -33,6 +34,6 @@ if __name__ == "__main__":
 
     print(dataFrameEXCEL)
 
-    dataFrameSQL = readSQL("california_housing_dataset", "data/housing.db")
+    dataFrameSQL = readSQL("data/housing.db")
     
     print(dataFrameSQL)
