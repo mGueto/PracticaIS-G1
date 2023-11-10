@@ -17,7 +17,6 @@ def readExcel(path:str) -> pd.DataFrame:
 
 def readSQL(path:str) -> pd.DataFrame:
     """Input: 
-    tableName: name of the table containing the dataset
     path: db file path
        Output: 
     Pandas dataframe """
