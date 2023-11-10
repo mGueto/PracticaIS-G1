@@ -13,34 +13,42 @@ import joblib
 import matplotlib.pyplot as plt
 
 
-st.header("Entrenamiento y Predicción de Modelos de Regresión Lineal")
-# Configuración de la página
-st.title("Aplicación de Regresión Lineal")
-st.sidebar.header("Opciones")
+# APPEARANCE
 
-# Carga de datos
-uploaded_file = st.sidebar.file_uploader("Cargar archivo (CSV, Excel o SQLite)", type=["csv", "xlsx", "db", "sqlite"])
+## Header
+st.header("Training and prediction of linear regression models")
+st.title("Linear regression tool")
+
+## Sidebar
+st.sidebar.header("Options")
+
+
+
+
+# FILE READING
+uploaded_file = st.sidebar.file_uploader("Load file (CSV, Excel or SQLite)", type=["csv", "xlsx", "db", "sqlite"])
 st.write("filename:", uploaded_file)
 data = None
 
 if uploaded_file is not None:
-    if uploaded_file.name.endswith(('.csv', '.xlsx')):
-        try:
-            data = readCSV(uploaded_file) if uploaded_file.name.endswith('.csv') else readExcel(uploaded_file)
-        except Exception as e:
-            st.error("Ocurrió un error al cargar el archivo: " + str(e))
+    if not uploaded_file.name.endswith('.csv', '.xlsx', '.db', '.sqlite'):
+        st.sidebar.error("Invalid format")
+    try:
+        if uploaded_file.name.endswith('.csv'):
+            data = readCSV(uploaded_file) 
+        elif uploaded_file.name.endswith('.xlsx'):
+            data = readExcel(uploaded_file)
+        else:
+            data = readSQL(uploaded_file)
+    except Exception as e:
+        st.error("An error ocurred while loading file: " + str(e))
+    
+            
 
-    elif uploaded_file.name.endswith(('.db', '.sqlite')):
-                conn = sqlite3.connect('C:/Users/Usuario/Desktop/PracticaIS-G1/data/housing.db') #Aquí va la función para leer sql
-                query = "SELECT * FROM california_housing_dataset"  # Reemplaza 'california_housing_dataset' con el nombre de tu tabla
-                data = pd.read_sql_query(query, conn)
-                conn.close()
-    else:
-            st.sidebar.error("Formato no válido")
-
-# Verificar si hay datos cargados
+## Check for loaded data
 if data is not None and not data.empty:
-    # Identificar columnas numéricas y no numéricas
+
+    ### Check for numeric columns
     numeric_columns = data.select_dtypes(include=['int64', 'float64']).columns
     non_numeric_columns = data.select_dtypes(exclude=['int64', 'float64']).columns
 else:
@@ -51,7 +59,7 @@ else:
 imputer = SimpleImputer(strategy='mean')
 data[numeric_columns] = imputer.fit_transform(data[numeric_columns])
 
-# Mostrar los primeros registros del conjunto de datos
+# Show
 st.write("Primeros registros del conjunto de datos:")
 st.write(data.head())
 
