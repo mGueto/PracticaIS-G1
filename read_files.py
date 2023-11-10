@@ -20,9 +20,10 @@ def readSQL(path:str) -> pd.DataFrame:
     path: db file path
        Output: 
     Pandas dataframe """
-    engine = sql.connect(path)
-    tableName = (pd.read_sql_query("SELECT * FROM sqlite_master WHERE type = 'table'", engine))['name'][0]
-    return pd.read_sql_query(f"SELECT * FROM {tableName}", engine)
+    with sql.connect(path) as engine:
+        tableName = (pd.read_sql_query("SELECT * FROM sqlite_master WHERE type = 'table'", engine))['name'][0]
+        table = pd.read_sql_query(f"SELECT * FROM {tableName}", engine)
+    return table
 
 if __name__ == "__main__":
     dataFrameCSV = readCSV("data/housing.csv")
