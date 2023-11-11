@@ -15,7 +15,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from uuid import uuid4
 
-# Use the command «streamlit run interface.py --server.port=8080 --browser.serverAddress='127.0.0.1'» to run the app
+# Use the command «streamlit run interface.py --server.port=8080 --browser.serverAddress='127.0.0.1'» to run the interface
 
 # APPEARANCE
 
