@@ -12,6 +12,7 @@ from sklearn.impute import SimpleImputer
 import joblib
 import matplotlib.pyplot as plt
 
+# Use the command «streamlit run interface.py --server.port=8080 --browser.serverAddress='127.0.0.1'» to run the app
 
 # APPEARANCE
 
@@ -31,15 +32,13 @@ st.write("filename:", uploaded_file)
 data = None
 
 if uploaded_file is not None:
-    if not uploaded_file.name.endswith('.csv', '.xlsx', '.db', '.sqlite'):
-        st.sidebar.error("Invalid format")
     try:
         if uploaded_file.name.endswith('.csv'):
             data = readCSV(uploaded_file) 
         elif uploaded_file.name.endswith('.xlsx'):
             data = readExcel(uploaded_file)
         else:
-            data = readSQL(uploaded_file)
+            data = readSQL('data/' + uploaded_file.name)
     except Exception as e:
         st.error("An error ocurred while loading file: " + str(e))
     
