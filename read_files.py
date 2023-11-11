@@ -18,14 +18,17 @@ def readExcel(path:str) -> pd.DataFrame:
     Pandas dataframe """
     return pd.read_excel(path)
 
-def readSQL(path:str) -> pd.DataFrame:
+def readSQL(uploaded_file) -> pd.DataFrame:
     """Input: 
     path: db file path
        Output: 
     Pandas dataframe """
-    with sql.connect(path) as engine:
+    conn, fp = SQLconnect(uploaded_file)
+    with conn as engine:
         tableName = (pd.read_sql_query("SELECT * FROM sqlite_master WHERE type = 'table'", engine))['name'][0]
         table = pd.read_sql_query(f"SELECT * FROM {tableName}", engine)
+    conn.close()
+    fp.unlink()
     return table
 
 def SQLconnect(db_bytes):
