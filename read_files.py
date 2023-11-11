@@ -1,5 +1,8 @@
 import pandas as pd
 import sqlite3 as sql
+from contextlib import contextmanager
+from pathlib import Path
+from uuid import uuid4
 
 def readCSV(path:str) -> pd.DataFrame:
     """Input: 
@@ -24,6 +27,12 @@ def readSQL(path:str) -> pd.DataFrame:
         tableName = (pd.read_sql_query("SELECT * FROM sqlite_master WHERE type = 'table'", engine))['name'][0]
         table = pd.read_sql_query(f"SELECT * FROM {tableName}", engine)
     return table
+
+def SQLconnect(db_bytes):
+    fp = Path(str(uuid4()))
+    fp.write_bytes(db_bytes.getvalue())
+    conn = sql.connect(str(fp))
+    return conn
 
 if __name__ == "__main__":
     dataFrameCSV = readCSV("data/housing.csv")

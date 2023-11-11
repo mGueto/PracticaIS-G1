@@ -11,6 +11,9 @@ from sklearn.metrics import mean_squared_error
 from sklearn.impute import SimpleImputer
 import joblib
 import matplotlib.pyplot as plt
+from contextlib import contextmanager
+from pathlib import Path
+from uuid import uuid4
 
 # Use the command «streamlit run interface.py --server.port=8080 --browser.serverAddress='127.0.0.1'» to run the app
 
@@ -31,6 +34,7 @@ uploaded_file = st.sidebar.file_uploader("Load file (CSV, Excel or SQLite)", typ
 st.write("filename:", uploaded_file)
 data = None
 
+
 if uploaded_file is not None:
     try:
         if uploaded_file.name.endswith('.csv'):
@@ -38,7 +42,10 @@ if uploaded_file is not None:
         elif uploaded_file.name.endswith('.xlsx'):
             data = readExcel(uploaded_file)
         else:
-            data = readSQL('data/' + uploaded_file.name) # the file .db must be in the directory "data"
+            with SQLconnect(uploaded_file) as engine:
+                tableName = (pd.read_sql_query("SELECT * FROM sqlite_master WHERE type = 'table'", engine))['name'][0]
+                table = pd.read_sql_query(f"SELECT * FROM {tableName}", engine)
+            data = table
     except Exception as e:
         st.error("An error ocurred while loading file: " + str(e))
     
