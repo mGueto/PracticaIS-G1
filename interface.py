@@ -38,7 +38,7 @@ if uploaded_file is not None:
         elif uploaded_file.name.endswith('.xlsx'):
             data = readExcel(uploaded_file)
         else:
-            data = readSQL('data/' + uploaded_file.name)
+            data = readSQL('data/' + uploaded_file.name) # the file .db must be in the directory "data"
     except Exception as e:
         st.error("An error ocurred while loading file: " + str(e))
     
