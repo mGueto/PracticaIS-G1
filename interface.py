@@ -42,10 +42,13 @@ if uploaded_file is not None:
         elif uploaded_file.name.endswith('.xlsx'):
             data = readExcel(uploaded_file)
         else:
-            with SQLconnect(uploaded_file) as engine:
+            e1, e2 = SQLconnect(uploaded_file)
+            with e1 as engine:
                 tableName = (pd.read_sql_query("SELECT * FROM sqlite_master WHERE type = 'table'", engine))['name'][0]
                 table = pd.read_sql_query(f"SELECT * FROM {tableName}", engine)
             data = table
+            e1.close()
+            e2.unlink()
     except Exception as e:
         st.error("An error ocurred while loading file: " + str(e))
     

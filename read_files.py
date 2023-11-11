@@ -32,7 +32,8 @@ def SQLconnect(db_bytes):
     fp = Path(str(uuid4()))
     fp.write_bytes(db_bytes.getvalue())
     conn = sql.connect(str(fp))
-    return conn
+    return conn, fp
+    
 
 if __name__ == "__main__":
     dataFrameCSV = readCSV("data/housing.csv")
