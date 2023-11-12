@@ -33,7 +33,7 @@ st.sidebar.header("Options")
 # Esto crea un botón para cargar archivos en la barra lateral de la aplicación. uploaded_file contendrá el archivo cargado y se verifica si es None. Se muestra el nombre del archivo cargado (que es un objeto de la clase UploadedFile) usando st.write.
 # FILE READING
 uploaded_file = st.sidebar.file_uploader("Load file (CSV, Excel or SQLite)", type=["csv", "xlsx", "db", "sqlite"])
-st.write("filename:", uploaded_file)
+st.write("filename:", uploaded_file.name)
 data = None # Al principio definimos las variables que se irán modificando para que la aplicación no de errores al intentar comparar valores que no existen.
 
 # Aquí se intenta leer el archivo cargado dependiendo de su extensión. Se manejan posibles excepciones y se muestra un mensaje de error si ocurre alguna.
@@ -69,60 +69,45 @@ if data is not None:
     st.write("Primeros registros del conjunto de datos:")
     st.write(data.head())
 
-    # En la barra lateral, el usuario selecciona las variables independientes y la variable objetivo.
+    # In the sidebar, the user selects the independent variables and the target variable.
     ## Variable selection
     st.sidebar.subheader("Seleccione las variables independientes y la variable objetivo:")
-    X = st.sidebar.multiselect("Variables independientes", numeric_columns) # Permitimos seleccionar varias columnas de variables independiente, para permitir la regresión simple (1 variable) y la regresión múltiple (+1 variable)
-    y = st.sidebar.selectbox("Variable objetivo", numeric_columns) # Esto se puede ajustar para permitir en vez de una sola variables objetivo, varias. Con multiselect, igual que se hace con las variables independientes (aunque eso está fuera de la práctica, solo quiere regresión múltiple, creo)
+    # Is allowed to use one or more independent variables, to make simple or multiple lineal regression
+    X = st.sidebar.multiselect("Variables independientes", numeric_columns) 
+    # Select the dependet variable
+    y = st.sidebar.selectbox("Variable objetivo", numeric_columns) 
 
-    # Se utiliza train_test_split para dividir el conjunto de datos en conjuntos de entrenamiento y prueba.
-    ## División del conjunto de datos en entrenamiento y prueba
-    test_size = st.sidebar.slider("Tamaño del conjunto de prueba", 0.1, 0.9, 0.2) # Se crea un control deslizante en la barra lateral. El control deslizante permite al usuario ajustar el tamaño del conjunto de prueba. El rango es de 0.1 a 1.0 y el valor predeterminado es 0.2. El tamaño del conjunto de prueba es la proporción del conjunto de datos que se utilizará para evaluar el rendimiento del modelo después de entrenarlo.
-    random_state = st.sidebar.number_input("Semilla aleatoria", value=42)
-
-    # Esta línea utiliza st.sidebar.number_input para crear una entrada de número en la barra lateral. 
-    # Permite al usuario especificar una semilla aleatoria. La semilla aleatoria se utiliza para garantizar que la división del conjunto de datos sea reproducible. 
-    # Si se utiliza la misma semilla, la división será la misma en ejecuciones posteriores. 
-    # Es decir, lo que hace una vez cogida la partición con el control deslizante, por cada semilla se seleccionan números aleatorios con los que entrenar el modelo.
-
+  
     if X is not None and y is not None:
-        #!!!! DA UN ERROR EN test_size cuando el deslizador llega a 1.0, esto es debido a que coge un conjunto de pruebas, y train_test_split no está pensada para cargar todo el conjunto de datos, para sería mejor añadir una opción extra
-        # https://github.com/scikit-learn/scikit-learn/issues/20276#issuecomment-862667965
-        # https://github.com/scikit-learn/scikit-learn/issues/20276#issuecomment-863215009
-        X_train, X_test, y_train, y_test = train_test_split(data[X], data[y], test_size=test_size, random_state=random_state) # Esta línea utiliza la función train_test_split de scikit-learn para dividir el conjunto de datos en conjuntos de entrenamiento y prueba.
-        # La razón para dividir el conjunto de datos es evaluar la capacidad del modelo para generalizar a datos no vistos. 
-        # El modelo se entrena en el conjunto de entrenamiento y se evalúa en el conjunto de prueba para estimar su rendimiento en situaciones del mundo real. 
-        # Esto es esencial para evitar sobreajuste (overfitting) y asegurar que el modelo sea capaz de hacer predicciones precisas en datos que no ha visto durante el entrenamiento.
+        X, y = data[X], data[y]
+       
         
         st.write("Información de depuración:")
-        st.write(X_train.head())  # Imprime las primeras filas de X_train
-        st.write(y_train.head())  # Imprime las primeras filas de y_train
+        st.write(X.head())  # Prints the firsts rows of X
+        st.write(y.head())  # Prints the firsts rows of y
 
-        if X_train.empty:
+        if X.empty:
             st.warning("X_train está vacío. Asegúrate de seleccionar variables independientes.")
         else:
-            # Se crea un modelo de regresión lineal y se entrena con los datos de entrenamiento.
-            ## Crear y entrenar el modelo de regresión lineal
+            # Create the lineal regression model
             model = LinearRegression()
-            model.fit(X_train, y_train)
+            model.fit(X, y)
 
-            # Se utilizan las variables independientes del conjunto de prueba para hacer predicciones con el modelo entrenado.
-            ## Realizar predicciones en el conjunto de prueba
-            y_pred = model.predict(X_test)
+            # Predictions based in the model
+            y_pred = model.predict(X)
 
-            # Se muestran métricas de rendimiento, en este caso, el error cuadrático medio.
-            ## Mostrar métricas de rendimiento
+            # show mean square error:
             st.subheader("Métricas de rendimiento:")
-            st.write("Error cuadrático medio:", mean_squared_error(y_test, y_pred))
+            # real values vs predicted values
+            st.write("Error cuadrático medio:", mean_squared_error(y, y_pred))
 
             # Se muestra una gráfica de dispersión con los datos reales y la línea de regresión generada por el modelo.
             # Ahora solo funciona cuando elijes una sola variable independiente, cuando elijes más, este método no funciona ya que los tamaños de x e y varían
-            #X corresponderá al nombre de una columna en tu conjunto de datos y habrá que iterar sobre ella:
-            st.write("X:",X)
+            
             ## Mostrar una gráfica de regresión
             st.subheader("Gráfica de Regresión Lineal")
-            plt.scatter(X_test, y_test, color='blue', label='Datos reales')
-            plt.plot(X_test, y_pred, color='red', linewidth=2, label='Regresión lineal')
+            plt.scatter(X, y, color='blue', label='Datos reales')
+            plt.plot(X, y_pred, color='red', linewidth=2, label='Regresión lineal')
             plt.xlabel("Variable Independiente")
             plt.ylabel("Variable Objetivo")
             plt.legend()
