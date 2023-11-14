@@ -2,6 +2,7 @@ from read_files import *
 from columns import *
 from regresion_simple import modelo_regresion_simple
 from regresion_multiple import modelo_regresion_multiple_3d
+from guardar_cargar_archivos import *
 
 
 import streamlit as st
@@ -82,33 +83,34 @@ if data is not None:
 
         
         if x.shape[1] == 1:
-            modelo_regresion_simple(x, y)
+            model = modelo_regresion_simple(x, y)
         else:
-            modelo_regresion_multiple_3d(x, y)
+            model = modelo_regresion_multiple_3d(x, y)
         
         
         # GUARDAR MODELO
-        """# Si se presiona el botón en la barra lateral, se guarda el modelo entrenado en un archivo llamado "modelo.pkl".
+        # Si se presiona el botón en la barra lateral, se guarda el modelo entrenado en un archivo llamado "modelo.pkl".
         ## Guardar el modelo (Está aún por desarrollar)
         if st.sidebar.button("Guardar modelo"):
-            joblib.dump(model, "modelo.pkl")
-            st.success("Modelo guardado con éxito")"""
+            savePath = "model.pkl"
+            SaveModel(model, savePath)
         
         
         # CARGAR MODELO
 
-        """# Si se selecciona la casilla de verificación en la barra lateral, se cargará el modelo guardado y se permitirá al usuario ingresar valores para hacer predicciones con el modelo. La predicción resultante se muestra en la interfaz.
+        # Si se selecciona la casilla de verificación en la barra lateral, se cargará el modelo guardado y se permitirá al usuario ingresar valores para hacer predicciones con el modelo. La predicción resultante se muestra en la interfaz.
         ## Hacer predicciones con el modelo guardado
         if st.sidebar.checkbox("Hacer predicciones con el modelo guardado"):
-            loaded_model = joblib.load("modelo.pkl")"""
+            loadPath = "data/model.pkl"
+            loaded_model = LoadModel(loadPath)
             
         # HACER PREDICCIONES
-        """st.subheader("Hacer predicciones:")
+        st.subheader("Hacer predicciones:")
         input_data = {}
         for variable in x:
             input_data[variable] = st.number_input(f"Ingrese el valor de {variable}")
         prediction = loaded_model.predict(pd.DataFrame([input_data]))
-        st.write("Valor estimado:", prediction)"""
+        st.write("Valor estimado:", prediction)
     else:
         st.info("Elegir las variables independientes y objetivo para continuar")
 
