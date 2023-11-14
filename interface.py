@@ -1,19 +1,20 @@
 from read_files import *
-from select_columns import *
+from columns import *
+from regresion_simple import modelo_regresion_simple
+from regresion_multiple import modelo_regresion_multiple_3d
 
 
 import streamlit as st
-import pandas as pd
-import sqlite3
+"""import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.impute import SimpleImputer
 import joblib
-import matplotlib.pyplot as plt
-from contextlib import contextmanager
+import matplotlib.pyplot as plt"""
+"""from contextlib import contextmanager
 from pathlib import Path
-from uuid import uuid4
+from uuid import uuid4"""
 
 # Use the command «streamlit run interface.py --server.port=8080 --browser.serverAddress='127.0.0.1'» to run the interface
 
@@ -56,13 +57,11 @@ if uploaded_file is not None:
 if data is not None:
 
     ### Check for numeric columns
-    numeric_columns = data.select_dtypes(include=['int64', 'float64']).columns
-    non_numeric_columns = data.select_dtypes(exclude=['int64', 'float64']).columns
-
+    numeric_columns = select_columns(data)
 
     # Se utiliza SimpleImputer de scikit-learn para imputar la media en las columnas numéricas del DataFrame donde haya valores nulos (sustituye los NULL por la media númerica, solo en las variables numericas)
-    imputer = SimpleImputer(strategy='median')
-    data[numeric_columns] = imputer.fit_transform(data[numeric_columns])
+    """imputer = SimpleImputer(strategy='median')
+    data[numeric_columns] = imputer.fit_transform(data[numeric_columns])"""
 
     # Se muestran los primeros registros del conjunto de datos después de la imputación de la media.
     ## Show
@@ -73,25 +72,30 @@ if data is not None:
     ## Variable selection
     st.sidebar.subheader("Seleccione las variables independientes y la variable objetivo:")
     # Is allowed to use one or more independent variables, to make simple or multiple lineal regression
-    X = st.sidebar.multiselect("Variables independientes", numeric_columns) 
+    x = st.sidebar.multiselect("Variables independientes", numeric_columns) 
     # Select the dependet variable
     y = st.sidebar.selectbox("Variable objetivo", numeric_columns) 
 
   
-    if X is not None and y is not None:
-        X, y = data[X], data[y]
-       
+    if x is not None and y is not None:
+        x, y = data[x], data[y]
+
         
-        st.write("Información de depuración:")
-        st.write(X.head())  # Prints the firsts rows of X
+        if x.shape[1] == 1:
+            modelo_regresion_simple(x, y)
+        else:
+            modelo_regresion_multiple_3d(x, y)
+       
+        """st.write("Información de depuración:")
+        st.write(x.head())  # Prints the firsts rows of X
         st.write(y.head())  # Prints the firsts rows of y
 
-        if X.empty:
+        if x.empty:
             st.warning("X_train está vacío. Asegúrate de seleccionar variables independientes.")
         else:
             # Create the lineal regression model
             model = LinearRegression()
-            model.fit(X, y)
+            model.fit(x, y)
 
             # Predictions based in the model
             y_pred = model.predict(X)
@@ -128,7 +132,7 @@ if data is not None:
                 for variable in X:
                     input_data[variable] = st.number_input(f"Ingrese el valor de {variable}")
                 prediction = loaded_model.predict(pd.DataFrame([input_data]))
-                st.write("Predicción:", prediction)
+                st.write("Predicción:", prediction)"""
     else:
         st.info("Elegir las variables independientes y objetivo para continuar")
 
