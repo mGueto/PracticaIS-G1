@@ -85,54 +85,30 @@ if data is not None:
             modelo_regresion_simple(x, y)
         else:
             modelo_regresion_multiple_3d(x, y)
-       
-        """st.write("Información de depuración:")
-        st.write(x.head())  # Prints the firsts rows of X
-        st.write(y.head())  # Prints the firsts rows of y
+        
+        
+        # GUARDAR MODELO
+        """# Si se presiona el botón en la barra lateral, se guarda el modelo entrenado en un archivo llamado "modelo.pkl".
+        ## Guardar el modelo (Está aún por desarrollar)
+        if st.sidebar.button("Guardar modelo"):
+            joblib.dump(model, "modelo.pkl")
+            st.success("Modelo guardado con éxito")"""
+        
+        
+        # CARGAR MODELO
 
-        if x.empty:
-            st.warning("X_train está vacío. Asegúrate de seleccionar variables independientes.")
-        else:
-            # Create the lineal regression model
-            model = LinearRegression()
-            model.fit(x, y)
-
-            # Predictions based in the model
-            y_pred = model.predict(X)
-
-            # show mean square error:
-            st.subheader("Métricas de rendimiento:")
-            # real values vs predicted values
-            st.write("Error cuadrático medio:", mean_squared_error(y, y_pred))
-
-            # Se muestra una gráfica de dispersión con los datos reales y la línea de regresión generada por el modelo.
-            # Ahora solo funciona cuando elijes una sola variable independiente, cuando elijes más, este método no funciona ya que los tamaños de x e y varían
+        """# Si se selecciona la casilla de verificación en la barra lateral, se cargará el modelo guardado y se permitirá al usuario ingresar valores para hacer predicciones con el modelo. La predicción resultante se muestra en la interfaz.
+        ## Hacer predicciones con el modelo guardado
+        if st.sidebar.checkbox("Hacer predicciones con el modelo guardado"):
+            loaded_model = joblib.load("modelo.pkl")"""
             
-            ## Mostrar una gráfica de regresión
-            st.subheader("Gráfica de Regresión Lineal")
-            plt.scatter(X, y, color='blue', label='Datos reales')
-            plt.plot(X, y_pred, color='red', linewidth=2, label='Regresión lineal')
-            plt.xlabel("Variable Independiente")
-            plt.ylabel("Variable Objetivo")
-            plt.legend()
-            st.pyplot(plt)
-
-            # Si se presiona el botón en la barra lateral, se guarda el modelo entrenado en un archivo llamado "modelo.pkl".
-            ## Guardar el modelo (Está aún por desarrollar)
-            if st.sidebar.button("Guardar modelo"):
-                joblib.dump(model, "modelo.pkl")
-                st.success("Modelo guardado con éxito")
-            
-            # Si se selecciona la casilla de verificación en la barra lateral, se cargará el modelo guardado y se permitirá al usuario ingresar valores para hacer predicciones con el modelo. La predicción resultante se muestra en la interfaz.
-            ## Hacer predicciones con el modelo guardado
-            if st.sidebar.checkbox("Hacer predicciones con el modelo guardado"):
-                loaded_model = joblib.load("modelo.pkl")
-                st.subheader("Hacer predicciones:")
-                input_data = {}
-                for variable in X:
-                    input_data[variable] = st.number_input(f"Ingrese el valor de {variable}")
-                prediction = loaded_model.predict(pd.DataFrame([input_data]))
-                st.write("Predicción:", prediction)"""
+        # HACER PREDICCIONES
+        """st.subheader("Hacer predicciones:")
+        input_data = {}
+        for variable in x:
+            input_data[variable] = st.number_input(f"Ingrese el valor de {variable}")
+        prediction = loaded_model.predict(pd.DataFrame([input_data]))
+        st.write("Valor estimado:", prediction)"""
     else:
         st.info("Elegir las variables independientes y objetivo para continuar")
 
