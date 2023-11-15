@@ -83,17 +83,18 @@ if data is not None:
 
         
         if x.shape[1] == 1:
-            model = modelo_regresion_simple(x, y)
+            model = modelo_regresion_simple(x, y) # the function does not return anything, so model is None. 
+            #Also, the graph of the regression line is not visible in the interface 
         else:
-            model = modelo_regresion_multiple_3d(x, y)
+            model = modelo_regresion_multiple_3d(x, y) # same that in function before
         
         
         # GUARDAR MODELO
         # Si se presiona el botón en la barra lateral, se guarda el modelo entrenado en un archivo llamado "modelo.pkl".
         ## Guardar el modelo (Está aún por desarrollar)
         if st.sidebar.button("Guardar modelo"):
-            savePath = "model.pkl"
-            SaveModel(model, savePath)
+            savePath = "data/model.pkl" # save in directory data because loadFile search in that directory
+            saveModel(model, savePath)
         
         
         # CARGAR MODELO
@@ -102,7 +103,7 @@ if data is not None:
         ## Hacer predicciones con el modelo guardado
         if st.sidebar.checkbox("Hacer predicciones con el modelo guardado"):
             loadPath = "data/model.pkl"
-            loaded_model = LoadModel(loadPath)
+            loaded_model = loadModel(loadPath)
             
         # HACER PREDICCIONES
         st.subheader("Hacer predicciones:")
