@@ -13,7 +13,7 @@ def modelo_regresion_simple(columnaX, columnaY):
     colores = plt.cm.viridis(y / y.max())  # Utiliza el mapa de colores "viridis"
 
     # Visualizar el modelo de regresión lineal simple con colores diferenciados
-    plt.scatter(X, y, c=colores, s=100, label='Datos')
+    plt.scatter(X, y, c='blue', s=100, label='Datos')
     plt.plot(X, modelo.predict(X), color='red', linewidth=2, label='Regresión Lineal')
     
     plt.title('Modelo de Regresión Lineal Simple')
