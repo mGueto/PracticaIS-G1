@@ -3,7 +3,7 @@ from columns import *
 from regresion_simple import modelo_regresion_simple
 from regresion_multiple import modelo_regresion_multiple_3d
 from guardar_cargar_archivos import *
-
+import matplotlib.pyplot as plt
 
 import streamlit as st
 """import pandas as pd
@@ -112,6 +112,16 @@ if data is not None:
             input_data[variable] = st.number_input(f"Ingrese el valor de {variable}")
         prediction = loaded_model.predict(pd.DataFrame([input_data]))
         st.write("Valor estimado:", prediction)
+
+        
+        # SHOW GRAPHIC
+        st.subheader("Gráfica de Regresión Lineal")
+        #plt.scatter(x, y, color='blue', label='Datos reales')
+        #plt.plot(x, model.predict(x), color='red', linewidth=2, label='Regresión lineal')
+        #plt.xlabel("Variable Independiente")
+        #plt.ylabel("Variable Objetivo")
+        #plt.legend()
+        st.pyplot(plt)
     else:
         st.info("Elegir las variables independientes y objetivo para continuar")
 
