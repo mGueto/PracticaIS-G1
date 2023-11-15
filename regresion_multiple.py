@@ -43,6 +43,8 @@ def modelo_regresion_multiple_3d(columnas_X, columna_Y):
     plt.title('Modelo de Regresión Lineal Múltiple en 3D')
     plt.show()
 
+    return modelo
+
 
 
 

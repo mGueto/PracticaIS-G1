@@ -23,4 +23,4 @@ def modelo_regresion_simple(columnaX, columnaY):
     plt.show()
 
 
-
+    return modelo
