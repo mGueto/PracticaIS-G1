@@ -1,12 +1,12 @@
 from sklearn.linear_model import LinearRegression
 import pandas as pd
 
-def entrenar_modelo_regresion(df, columnasX, columnaY):
+def entrenarModeloRegresion(df, columnasX, columnaY):
     # Rellenar NaN en las columnas de características
-    df[columnasX] = df[columnasX].fillna(method='ffill')
-    
-    # Rellenar NaN en la columna de la variable objetivo
-    df[columnaY] = df[columnaY].fillna(method='ffill')
+    df[columnasX] = df[columnasX].apply(lambda x: x.fillna(x.median()))
+
+    # Rellenar NaN en la columna de la variable objetivo con la mediana
+    df[columnaY] = df[columnaY].fillna(df[columnaY].median())
 
     # Obtén las características (X) y la variable objetivo (y) del DataFrame
     X = df[columnasX]
@@ -23,7 +23,7 @@ def entrenar_modelo_regresion(df, columnasX, columnaY):
 import matplotlib.pyplot as plt
 import numpy as np
 
-def graficar_prediccion(modelo, X, y):
+def graficarPrediccion(modelo, X, y):
     # Realizar predicciones utilizando el modelo
     y_pred = modelo.predict(X)
     
@@ -43,7 +43,7 @@ def graficar_prediccion(modelo, X, y):
 
 if __name__ == "__main__":
     from read_files import readCSV
-    modelM, X, y = entrenar_modelo_regresion(readCSV("data/housing.csv"), ['longitude', 'latitude'], 'latitude')
-    modelS, X, y = entrenar_modelo_regresion(readCSV("data/housing.csv"), ['longitude'], 'latitude')
+    modelM, X, y = entrenarModeloRegresion(readCSV("data/housing.csv"), ['longitude', 'latitude'], 'latitude')
+    modelS, X, y = entrenarModeloRegresion(readCSV("data/housing.csv"), ['longitude'], 'latitude')
 
-    graficar_prediccion(modelS, X, y)
+    graficarPrediccion(modelS, X, y)

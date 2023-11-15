@@ -28,24 +28,21 @@ st.title("Linear regression tool")
 ## Sidebar
 st.sidebar.header("Options")
 
-
-
-# Esto crea un botón para cargar archivos en la barra lateral de la aplicación. uploaded_file contendrá el archivo cargado y se verifica si es None. Se muestra el nombre del archivo cargado (que es un objeto de la clase UploadedFile) usando st.write.
+# Esto crea un botón para cargar archivos en la barra lateral de la aplicación. uploadedFile contendrá el archivo cargado y se verifica si es None. Se muestra el nombre del archivo cargado (que es un objeto de la clase UploadedFile) usando st.write.
 # FILE READING
-uploaded_file = st.sidebar.file_uploader("Load file (CSV, Excel or SQLite)", type=["csv", "xlsx", "db", "sqlite"])
-st.write("filename:", uploaded_file.name)
+uploadedFile = st.sidebar.file_uploader("Load file (CSV, Excel or SQLite)", type=["csv", "xlsx", "db", "sqlite"])
+st.write("filename:", uploadedFile.name)
 data = None # Al principio definimos las variables que se irán modificando para que la aplicación no de errores al intentar comparar valores que no existen.
 
 # Aquí se intenta leer el archivo cargado dependiendo de su extensión. Se manejan posibles excepciones y se muestra un mensaje de error si ocurre alguna.
-if uploaded_file is not None:
-    try: # Se llaman a las funciones de read_files
-
-        if uploaded_file.name.endswith('.csv'):
-            data = readCSV(uploaded_file) 
-        elif uploaded_file.name.endswith('.xlsx'):
-            data = readExcel(uploaded_file)
+if uploadedFile is not None:
+    try: # Se llaman a las funciones de readFiles
+        if uploadedFile.name.endswith('.csv'):
+            data = readCSV(uploadedFile) 
+        elif uploadedFile.name.endswith('.xlsx'):
+            data = readExcel(uploadedFile)
         else:
-            data = readSQL(uploaded_file)
+            data = readSQL(uploadedFile)
 
     except Exception as e:
         st.error("An error ocurred while loading file: " + str(e))
@@ -56,13 +53,12 @@ if uploaded_file is not None:
 if data is not None:
 
     ### Check for numeric columns
-    numeric_columns = data.select_dtypes(include=['int64', 'float64']).columns
-    non_numeric_columns = data.select_dtypes(exclude=['int64', 'float64']).columns
-
+    numericColumns = data.select_dtypes(include=['int64', 'float64']).columns
+    nonNumericColumns = data.select_dtypes(exclude=['int64', 'float64']).columns
 
     # Se utiliza SimpleImputer de scikit-learn para imputar la media en las columnas numéricas del DataFrame donde haya valores nulos (sustituye los NULL por la media númerica, solo en las variables numericas)
     imputer = SimpleImputer(strategy='median')
-    data[numeric_columns] = imputer.fit_transform(data[numeric_columns])
+    data[numericColumns] = imputer.fit_transform(data[numericColumns])
 
     # Se muestran los primeros registros del conjunto de datos después de la imputación de la media.
     ## Show
@@ -73,15 +69,12 @@ if data is not None:
     ## Variable selection
     st.sidebar.subheader("Seleccione las variables independientes y la variable objetivo:")
     # Is allowed to use one or more independent variables, to make simple or multiple lineal regression
-    X = st.sidebar.multiselect("Variables independientes", numeric_columns) 
+    X = st.sidebar.multiselect("Variables independientes", numericColumns) 
     # Select the dependet variable
-    y = st.sidebar.selectbox("Variable objetivo", numeric_columns) 
+    y = st.sidebar.selectbox("Variable objetivo", numericColumns) 
 
-  
     if X is not None and y is not None:
         X, y = data[X], data[y]
-       
-        
         st.write("Información de depuración:")
         st.write(X.head())  # Prints the firsts rows of X
         st.write(y.head())  # Prints the firsts rows of y
@@ -122,16 +115,15 @@ if data is not None:
             # Si se selecciona la casilla de verificación en la barra lateral, se cargará el modelo guardado y se permitirá al usuario ingresar valores para hacer predicciones con el modelo. La predicción resultante se muestra en la interfaz.
             ## Hacer predicciones con el modelo guardado
             if st.sidebar.checkbox("Hacer predicciones con el modelo guardado"):
-                loaded_model = joblib.load("modelo.pkl")
+                loadedModel = joblib.load("modelo.pkl")
                 st.subheader("Hacer predicciones:")
-                input_data = {}
+                inputData = {}
                 for variable in X:
-                    input_data[variable] = st.number_input(f"Ingrese el valor de {variable}")
-                prediction = loaded_model.predict(pd.DataFrame([input_data]))
+                    inputData[variable] = st.number_input(f"Ingrese el valor de {variable}")
+                prediction = loadedModel.predict(pd.DataFrame([inputData]))
                 st.write("Predicción:", prediction)
     else:
         st.info("Elegir las variables independientes y objetivo para continuar")
 
 else:
     st.info("Carga datos para continuar.")
-
