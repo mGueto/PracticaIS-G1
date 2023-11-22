@@ -3,6 +3,9 @@ from columns import *
 from regresion_simple import modelo_regresion_simple
 from regresion_multiple import modelo_regresion_multiple_3d
 from guardar_cargar_archivos import *
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
+
 import matplotlib.pyplot as plt
 
 import streamlit as st
@@ -83,10 +86,9 @@ if data is not None:
 
         
         if x.shape[1] == 1:
-            model = modelo_regresion_simple(x, y) # the function does not return anything, so model is None. 
-            #Also, the graph of the regression line is not visible in the interface 
+            model = modelo_regresion_simple(x, y)
         else:
-            model = modelo_regresion_multiple_3d(x, y) # same that in function before
+            model = modelo_regresion_multiple_3d(x, y)
         
         
         # GUARDAR MODELO
@@ -105,7 +107,14 @@ if data is not None:
             loadPath = "data/model.pkl"
             loaded_model = loadModel(loadPath)
             
-        # HACER PREDICCIONES
+        # Goodness of fit
+        yPred = model.predict(x)
+        st.subheader("Bondad de ajuste:")
+        st.write("Coeficiente de determinacion:", r2_score(y, yPred))
+        st.write("Error cuadrático medio:", mean_squared_error(y, yPred))
+        
+
+        # Make predictions
         st.subheader("Hacer predicciones:")
         input_data = {}
         for variable in x:
