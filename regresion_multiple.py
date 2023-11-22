@@ -15,13 +15,13 @@ def modelo_regresion_multiple(columnas_X, columna_Y):
     modelo = LinearRegression()
     modelo.fit(X, y)
     
-    # Crear una malla 3D
+    """    # Crear una malla 3D
    # x1, x2 = np.meshgrid(X[:,0], X[:,1])
     x1 = np.linspace(X[:,0].min(), X[:,0].max(), num=50)
     x2 = np.linspace(X[:,1].min(), X[:,1].max(), num=50)
     x1, x2 = np.meshgrid(x1, x2)
     y_pred = modelo.predict(np.c_[x1.ravel(), x2.ravel()]).reshape(x1.shape)
-    
+    """
     """# Visualizar el plano de regresión en 3D
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')

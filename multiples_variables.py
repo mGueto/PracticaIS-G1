@@ -25,8 +25,8 @@ def regresion_entre_variables(columnaX, columnaY):
         plt.ylabel(columnaY.name)
         plt.legend()
         plt.show()
-        st.pyplot(plt)
-        plt.clf()
+        st.pyplot(plt) # show in interface the graphic
+        plt.clf() # clear plot
 
 # Ejemplo de uso:
 # Supongamos que df_dependiente es el DataFrame con la variable dependiente

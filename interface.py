@@ -130,8 +130,10 @@ if data is not None:
         #plt.xlabel("Variable Independiente")
         #plt.ylabel("Variable Objetivo")
         #plt.legend()
-        
-        regresion_entre_variables(x,y)
+        if x.shape[1] > 1:
+            regresion_entre_variables(x,y)
+        else:
+            st.pyplot(plt)
     else:
         st.info("Elegir las variables independientes y objetivo para continuar")
 
