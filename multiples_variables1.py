@@ -1,10 +1,8 @@
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
-import streamlit as st
 
 def regresion_entre_variables(columnaX, columnaY):
     for columna_independiente in columnaX.columns:
-        print(columna_independiente, '\n', '#'*10, columnaX.columns)
         # Extraer las columnas correspondientes de los DataFrames
         X = columnaX[columna_independiente].values.reshape(-1, 1)
         y = columnaY.values
@@ -23,14 +21,9 @@ def regresion_entre_variables(columnaX, columnaY):
         plt.ylabel(columnaY.name)
         plt.legend()
         plt.show()
-        st.pyplot(plt)
-        plt.clf()
+
 
 # Ejemplo de uso:
 # Supongamos que df_dependiente es el DataFrame con la variable dependiente
 # y df_independientes es el DataFrame con las variables independientes
 # regresion_entre_variables(df_dependiente['VariableDependiente'], df_independientes)
-if __name__ == "__main__":
-    import pandas as pd
-    df = pd.read_csv('data/housing.csv')
-    regresion_entre_variables(df[['latitude', 'longitude', 'housing_median_age']], df['latitude'])

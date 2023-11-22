@@ -1,11 +1,11 @@
 from read_files import *
 from columns import *
 from regresion_simple import modelo_regresion_simple
-from regresion_multiple import modelo_regresion_multiple_3d
+from regresion_multiple import modelo_regresion_multiple
 from guardar_cargar_archivos import *
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-
+from multiples_variables import *
 import matplotlib.pyplot as plt
 
 import streamlit as st
@@ -88,7 +88,7 @@ if data is not None:
         if x.shape[1] == 1:
             model = modelo_regresion_simple(x, y)
         else:
-            model = modelo_regresion_multiple_3d(x, y)
+            model = modelo_regresion_multiple(x, y)
         
         
         # GUARDAR MODELO
@@ -130,7 +130,8 @@ if data is not None:
         #plt.xlabel("Variable Independiente")
         #plt.ylabel("Variable Objetivo")
         #plt.legend()
-        st.pyplot(plt)
+        
+        regresion_entre_variables(x,y)
     else:
         st.info("Elegir las variables independientes y objetivo para continuar")
 

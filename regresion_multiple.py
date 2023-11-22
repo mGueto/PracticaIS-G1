@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.linear_model import LinearRegression
+from multiples_variables import *
 
 
-
-def modelo_regresion_multiple_3d(columnas_X, columna_Y):
+def modelo_regresion_multiple(columnas_X, columna_Y):
     # Tomar un subconjunto más pequeño de los datos
 
     X = columnas_X.values
@@ -22,7 +22,7 @@ def modelo_regresion_multiple_3d(columnas_X, columna_Y):
     x1, x2 = np.meshgrid(x1, x2)
     y_pred = modelo.predict(np.c_[x1.ravel(), x2.ravel()]).reshape(x1.shape)
     
-    # Visualizar el plano de regresión en 3D
+    """# Visualizar el plano de regresión en 3D
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     
@@ -40,8 +40,9 @@ def modelo_regresion_multiple_3d(columnas_X, columna_Y):
     # Ajustar la posición de la barra de color
     cbar = fig.colorbar(surf, shrink=0.5, aspect=10, pad=0.15)
     
-    plt.title('Modelo de Regresión Lineal Múltiple en 3D')
-    plt.show()
+    plt.title('Modelo de Regresión Lineal Múltiple')
+    regresion_entre_variables(columnas_X, columna_Y)
+    plt.show()"""
 
     return modelo
 
