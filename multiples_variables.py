@@ -2,6 +2,8 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import streamlit as st
 
+# very slow (create a new model for each variable), improvable
+
 def regresion_entre_variables(columnaX, columnaY):
     for columna_independiente in columnaX.columns:
         print(columna_independiente, '\n', '#'*10, columnaX.columns)
