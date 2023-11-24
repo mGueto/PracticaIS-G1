@@ -7,6 +7,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 from multiples_variables import *
 import matplotlib.pyplot as plt
+import subprocess
 
 import streamlit as st
 """import pandas as pd
@@ -113,6 +114,9 @@ if data is not None:
         st.write("Coeficiente de determinacion:", r2_score(y, yPred))
         st.write("Error cuadrático medio:", mean_squared_error(y, yPred))
         
+        if st.sidebar.button("Guardar archivo"):
+            # call file pop_up_save_file.py to open a pop up window to copy model.pkl to a new destination
+            subprocess.Popen(["python", "pop_up_save_file.py"]) 
 
         # Make predictions
         st.subheader("Hacer predicciones:")
