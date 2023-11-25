@@ -3,6 +3,8 @@ from tkinter import filedialog
 import shutil
 
 def save_file():
+    """Creates a file explorer popup that makes a copy of the 
+    model.pkl file located in 'data' directory"""
     window = Tk()
     window.withdraw()
 
