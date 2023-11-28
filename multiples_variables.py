@@ -5,6 +5,8 @@ import streamlit as st
 # very slow (create a new model for each variable), improvable
 
 def regresion_entre_variables(columnaX, columnaY):
+
+    resultados = []
     for columna_independiente in columnaX.columns:
         print(columna_independiente, '\n', '#'*10, columnaX.columns)
         # Extraer las columnas correspondientes de los DataFrames
@@ -14,6 +16,15 @@ def regresion_entre_variables(columnaX, columnaY):
         # Ajustar el modelo de regresión lineal
         modelo = LinearRegression()
         modelo.fit(X, y)
+
+        # Almacenar los resultados en la lista
+        resultado = {
+            'variable_dependiente': columnaY.name,
+            'variable_independiente': columna_independiente,
+            'coeficiente': modelo.coef_[0],
+            'intercepto': modelo.intercept_
+        }
+        resultados.append(resultado)
 
         # Visualizar el modelo de regresión lineal simple con colores diferenciados
         colores = plt.cm.viridis(y / y.max())
@@ -27,6 +38,7 @@ def regresion_entre_variables(columnaX, columnaY):
         plt.show()
         st.pyplot(plt) # show in interface the graphic
         plt.clf() # clear plot
+    return resultados
 
 # Ejemplo de uso:
 # Supongamos que df_dependiente es el DataFrame con la variable dependiente

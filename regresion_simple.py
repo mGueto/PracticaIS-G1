@@ -8,6 +8,8 @@ def modelo_regresion_simple(columnaX, columnaY):
     y = columnaY.values
     modelo = LinearRegression()
     modelo.fit(X, y)
+    coeficientes= modelo.coef_
+    intercepto = modelo.intercept_
     
     # Definir colores en función de la variable dependiente
     colores = plt.cm.viridis(y / y.max())  # Utiliza el mapa de colores "viridis"
@@ -23,4 +25,4 @@ def modelo_regresion_simple(columnaX, columnaY):
     plt.show()
 
 
-    return modelo
+    return coeficientes,intercepto

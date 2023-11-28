@@ -107,7 +107,8 @@ m.modelos(l.data, s.x, s.y)
         
         
         # GUARDAR MODELO
-        # Si se presiona el botón en la barra lateral, se guarda el modelo entrenado en un archivo llamado "modelo.pkl".
+        # Si se presiona el botón en la barra lateral, se guarda el modelo entrenado en un archivo 
+        # llamado "modelo.pkl".
         ## Guardar el modelo (Está aún por desarrollar)
         if st.sidebar.button("Guardar modelo"):
             savePath = "data/model.pkl" # save in directory data because loadFile search in that directory
@@ -116,7 +117,9 @@ m.modelos(l.data, s.x, s.y)
         
         # CARGAR MODELO
 
-        # Si se selecciona la casilla de verificación en la barra lateral, se cargará el modelo guardado y se permitirá al usuario ingresar valores para hacer predicciones con el modelo. La predicción resultante se muestra en la interfaz.
+        # Si se selecciona la casilla de verificación en la barra lateral, se cargará el modelo guardado 
+        # y se permitirá al usuario ingresar valores para hacer predicciones con el modelo. 
+        # La predicción resultante se muestra en la interfaz.
         ## Hacer predicciones con el modelo guardado
         if st.sidebar.checkbox("Hacer predicciones con el modelo guardado"):
             loadPath = "data/model.pkl"
