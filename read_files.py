@@ -33,19 +33,3 @@ def readSQL(uploaded_file) -> pd.DataFrame:
     conn.close()
     fp.unlink()
     return table
-
-
-    
-
-if __name__ == "__main__":
-    dataFrameCSV = readCSV("data/housing.csv")
-
-    print(dataFrameCSV)
-
-    dataFrameEXCEL = readExcel("data/housing.xlsx")
-
-    print(dataFrameEXCEL)
-
-    dataFrameSQL = readSQL("data/housing.db")
-    
-    print(dataFrameSQL)

@@ -35,16 +35,8 @@ def regresion_entre_variables(columnaX, columnaY):
         plt.xlabel(columna_independiente)
         plt.ylabel(columnaY.name)
         plt.legend()
-        plt.show()
         st.pyplot(plt) # show in interface the graphic
         plt.clf() # clear plot
-    return resultados
 
-# Ejemplo de uso:
-# Supongamos que df_dependiente es el DataFrame con la variable dependiente
-# y df_independientes es el DataFrame con las variables independientes
-# regresion_entre_variables(df_dependiente['VariableDependiente'], df_independientes)
-if __name__ == "__main__":
-    import pandas as pd
-    df = pd.read_csv('data/housing.csv')
-    regresion_entre_variables(df[['latitude', 'longitude', 'housing_median_age']], df['latitude'])
+
+    return resultados

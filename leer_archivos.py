@@ -1,8 +1,6 @@
 from read_files import *
 from columns import *
 from regresion_simple import modelo_regresion_simple
-from regresion_multiple import modelo_regresion_multiple
-from guardar_cargar_archivos import *
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 from multiples_variables import *
@@ -12,7 +10,7 @@ import subprocess
 import streamlit as st
 
 def leer_archivos():
-    uploaded_file = st.sidebar.file_uploader("Load file (CSV, Excel or SQLite)", type=["csv", "xlsx", "db", "sqlite"])
+    uploaded_file = st.sidebar.file_uploader("Cargar archivo (csv, xlsx, db, sqlite, pkl)", type=["csv", "xlsx", "db", "sqlite", "pkl"])
     st.write("filename:", uploaded_file.name)
     data = None # Al principio definimos las variables que se irán modificando para que la 
     #aplicación no de errores al intentar comparar valores que no existen.
@@ -26,8 +24,10 @@ def leer_archivos():
             elif uploaded_file.name.endswith('.xlsx'):
                 data = readExcel(uploaded_file)
             else:
+                uploaded_file.name.endswith('.bd')
                 data = readSQL(uploaded_file)
 
         except Exception as e:
             st.error("An error ocurred while loading file: " + str(e))
+    
     return data

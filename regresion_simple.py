@@ -1,13 +1,14 @@
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+import streamlit as st
+import pandas as pd
 
-
-
+@st.cache_resource
 def modelo_regresion_simple(columnaX, columnaY):
-    X = columnaX.values.reshape(-1, 1)
+    x = columnaX.values.reshape(-1, 1)
     y = columnaY.values
     modelo = LinearRegression()
-    modelo.fit(X, y)
+    modelo.fit(x, y)
     coeficientes= modelo.coef_
     intercepto = modelo.intercept_
     
@@ -15,14 +16,15 @@ def modelo_regresion_simple(columnaX, columnaY):
     colores = plt.cm.viridis(y / y.max())  # Utiliza el mapa de colores "viridis"
 
     # Visualizar el modelo de regresión lineal simple con colores diferenciados
-    plt.scatter(X, y, c='blue', s=100, label='Datos')
-    plt.plot(X, modelo.predict(X), color='red', linewidth=2, label='Regresión Lineal')
+    plt.scatter(x, y, c='blue', s=100, label='Datos')
+    plt.plot(x, modelo.predict(x), color='red', linewidth=2, label='Regresión Lineal')
     
     plt.title('Modelo de Regresión Lineal Simple')
     plt.xlabel('Variable Independiente')
     plt.ylabel('Variable Dependiente')
     plt.legend()
-    plt.show()
+    st.pyplot(plt)
+    
+    
 
-
-    return coeficientes,intercepto
+    return modelo

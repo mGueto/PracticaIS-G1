@@ -1,13 +1,3 @@
-from read_files import *
-from columns import *
-from regresion_simple import modelo_regresion_simple
-from regresion_multiple import modelo_regresion_multiple
-from guardar_cargar_archivos import *
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
-from multiples_variables import *
-import matplotlib.pyplot as plt
-import subprocess
 from leer_archivos import *
 import leer_archivos as l
 import streamlit as st
@@ -35,5 +25,7 @@ def seleccion_columnas(data):
         x = st.sidebar.multiselect("Variables independientes", numeric_columns) 
         # Select the dependet variable
         y = st.sidebar.selectbox("Variable objetivo", numeric_columns) 
-
+    
     return x, y
+
+    
