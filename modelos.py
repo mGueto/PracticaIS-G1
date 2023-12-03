@@ -12,19 +12,10 @@ from seleccionar_columnas import *
 import seleccionar_columnas as s
 
 def crearModelo(data, x, y):
-
-        
         if x is not None and y is not None:
-            x, y = data[x], data[y]
-
-            
+            x, y = data[x], data[y]            
             if x.shape[1] == 1:
                 modelo = modelo_regresion_simple(x, y)
-
-                
             else:
                 modelo = regresion_entre_variables(x, y)
-
-           
-
         return modelo   
