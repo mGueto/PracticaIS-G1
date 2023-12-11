@@ -4,39 +4,27 @@ import streamlit as st
 
 # very slow (create a new model for each variable), improvable
 
-def regresion_entre_variables(columnaX, columnaY):
+def modelo_regresion_multiple(columnas_X, columna_Y):
+    # Tomar un subconjunto más pequeño de los datos
 
-    resultados = []
-    for columna_independiente in columnaX.columns:
-        print(columna_independiente, '\n', '#'*10, columnaX.columns)
-        # Extraer las columnas correspondientes de los DataFrames
-        X = columnaX[columna_independiente].values.reshape(-1, 1)
-        y = columnaY.values
+    X = columnas_X
+    y = columna_Y
+    
+    # Entrenar el modelo de regresión
+    modelo = LinearRegression()
+    modelo.fit(X, y)
+    coeficientes = modelo.coef_
+    intercepto = modelo.intercept_
 
-        # Ajustar el modelo de regresión lineal
-        modelo = LinearRegression()
-        modelo.fit(X, y)
-
-        # Almacenar los resultados en la lista
-        resultado = {
-            'variable_dependiente': columnaY.name,
-            'variable_independiente': columna_independiente,
-            'coeficiente': modelo.coef_[0],
-            'intercepto': modelo.intercept_
-        }
-        resultados.append(resultado)
-
-        # Visualizar el modelo de regresión lineal simple con colores diferenciados
-        colores = plt.cm.viridis(y / y.max())
-        plt.scatter(X, y, c=colores, s=100, label='Datos')
-        plt.plot(X, modelo.predict(X), color='red', linewidth=2, label='Regresión Lineal')
-
-        plt.title(f'Regresión entre {columnaY.name} y {columna_independiente}')
-        plt.xlabel(columna_independiente)
-        plt.ylabel(columnaY.name)
-        plt.legend()
-        st.pyplot(plt) # show in interface the graphic
-        plt.clf() # clear plot
-
-
-    return resultados
+    for i, columna in enumerate(X.columns):
+            predicciones = intercepto + coeficientes[i] * X[columna]
+            print(intercepto, coeficientes[i], X[columna])
+            # Visualizar los datos y la predicción
+            plt.scatter(X[columna], y, label=f'Datos reales ({columna})')
+            plt.plot(X[columna], predicciones, label=f'Predicción ({columna})', color='red')
+            plt.xlabel(columna)
+            plt.ylabel(y.name)  # Suponemos que df_Y tiene una sola columna
+            plt.legend()
+            plt.show()
+            st.pyplot(plt)
+            plt.clf

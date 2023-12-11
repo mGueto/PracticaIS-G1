@@ -26,7 +26,7 @@ def crearModelo(data, x, y):
 
                 
             else:
-                modelo = regresion_entre_variables(x, y)
+                modelo = modelo_regresion_multiple(x, y)
 
            
 
