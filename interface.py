@@ -20,9 +20,27 @@ st.sidebar.header("Options")
 
 data = l.leer_archivos()
 x , y = s.seleccion_columnas(data)
-if st.sidebar.button("Crear y visualizar modelo"):
-    modelo = m.crearModelo(data,x,y)
 
+
+# buttons displayed in the interface
+createModelButton = st.sidebar.button("Crear y visualizar modelo") 
+saveModelButton = st.sidebar.button("Guardar modelo")
+
+if 'model' not in st.session_state:
+    st.session_state.model = None
+if 'modelCreated' not in st.session_state:
+    st.session_state.modelCreated = False
+            
+
+if createModelButton or st.session_state.modelCreated:
+    st.session_state.model = m.crearModelo(data,x,y)
+    st.session_state.modelCreated = True
+
+if saveModelButton:
+    if st.session_state.modelCreated:
+        pass # implment "save model" saving st.session_state.model
+    else:
+        st.error("No has creado ningún modelo")
 
 
 
