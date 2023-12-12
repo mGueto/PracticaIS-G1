@@ -1,10 +1,10 @@
 import streamlit as st
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-from sklearn import LinearRegression
-from pandas import Series, DataFrame as pd
+from sklearn.linear_model import LinearRegression
+from pandas import Series, DataFrame 
 
-def showError(model: LinearRegression, x: pd.DataFrame, y: pd.Series):
+def showError(model: LinearRegression, x: DataFrame, y: Series):
     """Shows in the interface the goodnes of fit (mean squared error and r^2)"""
     # calculate predictions of the model
     yPred = model.predict(x)

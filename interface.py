@@ -27,14 +27,16 @@ x , y = s.seleccion_columnas(data)
 # buttons displayed in the interface
 createModelButton = st.sidebar.button("Crear y visualizar modelo") 
 saveModelButton = st.sidebar.button("Guardar modelo")
+deleteModelButton = st.sidebar.button("Borrar modelo")
 
 if 'model' not in st.session_state:
     st.session_state.model = None
 if 'modelCreated' not in st.session_state:
     st.session_state.modelCreated = False
+
             
 
-if createModelButton or st.session_state.modelCreated:
+if createModelButton or (st.session_state.modelCreated and not deleteModelButton):
     st.session_state.model = m.crearModelo(data,x,y)
     st.session_state.modelCreated = True
     e.showError(st.session_state.model, data[x], data[y]) # maybe x should be equal to data[x] 
@@ -45,6 +47,11 @@ if saveModelButton:
     else:
         st.error("No has creado ningún modelo")
 
+if deleteModelButton:
+    st.session_state.model = None
+    st.session_state.modelCreated = False
+
+    
 
 
 
