@@ -27,4 +27,6 @@ def modelo_regresion_multiple(columnas_X, columna_Y):
             plt.legend()
             plt.show()
             st.pyplot(plt)
-            plt.clf
+            plt.clf()
+    
+    return modelo
