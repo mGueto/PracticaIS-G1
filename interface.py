@@ -11,6 +11,8 @@ import leer_archivos as l
 import streamlit as st
 import seleccionar_columnas as s
 import modelos as m
+import showError as e
+from copy import deepcopy
 
 st.header("Training and prediction of linear regression models")
 st.title("Linear regression tool")
@@ -35,6 +37,7 @@ if 'modelCreated' not in st.session_state:
 if createModelButton or st.session_state.modelCreated:
     st.session_state.model = m.crearModelo(data,x,y)
     st.session_state.modelCreated = True
+    e.showError(st.session_state.model, data[x], data[y]) # maybe x should be equal to data[x] 
 
 if saveModelButton:
     if st.session_state.modelCreated:
