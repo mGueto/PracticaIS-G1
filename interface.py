@@ -11,6 +11,7 @@ from seleccionar_columnas import *
 import streamlit as st
 from modelos import *
 import prediction as p
+import pickle
 
 st.header("Training and prediction of linear regression models")
 st.title("Linear regression tool")
@@ -26,6 +27,7 @@ x , y = seleccion_columnas(data)
 createModelButton = st.sidebar.button("Crear y visualizar modelo") 
 saveModelButton = st.sidebar.button("Guardar modelo")
 makeprediction = st.sidebar.button("Hacer predicción")
+loadModelButton = st.sidebar.button("Cargar modelo") 
 
 if 'model' not in st.session_state:
     st.session_state.model = None
@@ -54,6 +56,12 @@ if saveModelButton:
     else:
         st.error("No has creado ningún modelo")
 
-
+if loadModelButton:
+    # Allow the user to upload a model file
+    uploaded_file = st.file_uploader("Cargar archivo .pkl", type=["pkl"])
+    if uploaded_file is not None:
+        # Load the model from the uploaded file
+        st.session_state.model = pickle.load(uploaded_file)
+        st.session_state.modelCreated = True
 
 
