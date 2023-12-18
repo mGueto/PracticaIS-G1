@@ -54,18 +54,12 @@ if 'predictionCreated' not in st.session_state:
 
 
 if makeprediction or st.session_state.predictionCreated:
-        st.session_state.predictionCreated = True
-        if st.session_state.modelCreated:
-            modelo = st.session_state.model
-            p.prediction(modelo, x)
-
-
-if saveModelButton:
+    st.session_state.predictionCreated = True
     if st.session_state.modelCreated:
-        pass # implment "save model" saving st.session_state.model
-    else:
-        st.error("No has creado ningún modelo")
-
+        modelo = st.session_state.model
+        p.prediction(modelo, x)
+    if st.session_state.modelCreated:
+        downloadButton(st.session_state.model)
 
 if loadModelButton:
     # Allow the user to upload a model file
