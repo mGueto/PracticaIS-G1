@@ -23,10 +23,12 @@ def crearModelo(data, x, y):
             
             if x.shape[1] == 1:
                 modelo = modelo_regresion_simple(x, y)
+                
 
                 
             else:
                 modelo = modelo_regresion_multiple(x, y)
+                
 
            
 

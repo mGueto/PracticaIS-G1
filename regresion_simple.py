@@ -3,9 +3,9 @@ from sklearn.linear_model import LinearRegression
 import streamlit as st
 import pandas as pd
 
-@st.cache_resource
+
 def modelo_regresion_simple(columnaX, columnaY):
-    x = columnaX.values.reshape(-1, 1)
+    x = columnaX.values
     y = columnaY.values
     modelo = LinearRegression()
     modelo.fit(x, y)
@@ -20,8 +20,8 @@ def modelo_regresion_simple(columnaX, columnaY):
     plt.plot(x, modelo.predict(x), color='red', linewidth=2, label='Regresión Lineal')
     
     plt.title('Modelo de Regresión Lineal Simple')
-    plt.xlabel('Variable Independiente')
-    plt.ylabel('Variable Dependiente')
+    plt.xlabel(columnaX.columns[0])
+    plt.ylabel(columnaY.name)
     plt.legend()
     st.pyplot(plt)
     
