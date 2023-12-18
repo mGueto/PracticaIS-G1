@@ -24,4 +24,4 @@ def prediction(modelo,x):
         prediccion = modelo.predict(input_data)
         
         st.sidebar.subheader("Resultado de la Predicción:")
-        st.sidebar.write(f"Predicción: {prediccion[0]}")
+        st.sidebar.write(f"Predicción de : {prediccion[0]}")

@@ -19,7 +19,7 @@ def modelo_regresion_multiple(columnas_X, columna_Y):
     for i, columna in enumerate(X.columns):
             predicciones = intercepto + coeficientes[i] * X[columna]
             # Visualizar los datos y la predicción
-            plt.scatter(X[columna], y, label=f'Datos reales ({columna})')
+            plt.scatter(X[columna], y, label=f'Datos')
             plt.plot(X[columna], predicciones, label=f'Predicción ({columna})', color='red')
             plt.xlabel(columna)
             plt.ylabel(y.name)  # Suponemos que df_Y tiene una sola columna
