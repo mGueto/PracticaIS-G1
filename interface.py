@@ -27,7 +27,6 @@ x , y = s.seleccion_columnas(data)
 
 # buttons displayed in the interface
 createModelButton = st.sidebar.button("Crear y visualizar modelo") 
-saveModelButton = st.sidebar.button("Guardar modelo")
 loadModelButton = st.sidebar.button("Cargar modelo") 
 
 
@@ -47,17 +46,6 @@ if createModelButton or (st.session_state.modelCreated):
     downloadButton(st.session_state.model)
     e.showError(st.session_state.model, data[x], data[y]) # maybe x should be equal to data[x] 
 
-if 'prediction' not in st.session_state:
-     st.session_state.prediction = None
-if 'predictionCreated' not in st.session_state:
-     st.session_state.predictionCreated = False
-
-
-if saveModelButton:
-    if st.session_state.modelCreated:
-        pass # implment "save model" saving st.session_state.model
-    else:
-        st.error("No has creado ningún modelo")
 
 
 if loadModelButton:
