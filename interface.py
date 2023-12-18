@@ -27,7 +27,6 @@ x , y = s.seleccion_columnas(data)
 
 # buttons displayed in the interface
 createModelButton = st.sidebar.button("Crear y visualizar modelo") 
-saveModelButton = st.sidebar.button("Guardar modelo")
 makeprediction = st.sidebar.button("Hacer predicción")
 loadModelButton = st.sidebar.button("Cargar modelo") 
 
