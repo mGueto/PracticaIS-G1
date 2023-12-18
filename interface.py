@@ -42,6 +42,7 @@ if 'modelCreated' not in st.session_state:
 if createModelButton or (st.session_state.modelCreated):
     st.session_state.model = m.crearModelo(data,x,y)
     st.session_state.modelCreated = True
+    downloadButton(st.session_state.model)
     e.showError(st.session_state.model, data[x], data[y]) # maybe x should be equal to data[x] 
 
 if 'prediction' not in st.session_state:
@@ -55,8 +56,7 @@ if makeprediction or st.session_state.predictionCreated:
     if st.session_state.modelCreated:
         modelo = st.session_state.model
         p.prediction(modelo, x)
-    if st.session_state.modelCreated:
-        downloadButton(st.session_state.model)
+
 
 if loadModelButton:
     # Allow the user to upload a model file
