@@ -28,11 +28,12 @@ def downloadButton(modelo):
     try:
         save_object("model_to_save.pickle", modelo)
         with open("model_to_save.pickle", "rb") as file:
-            st.sidebar.download_button(
+
+            if st.sidebar.download_button(
                     label="Descargar modelo",
                     data=file,
                     file_name="model.pickle",
-                    mime="pickle/pickle")
-            st.write("Se ha guardado correctamente el modelo. ¡Revise descargas!")
+                    mime="pickle/pickle"):
+                st.sidebar.write("Se ha guardado correctamente el modelo. ¡Revise descargas!")
     except:
         st.write("¡Error! No se puedo guardar el modelo")

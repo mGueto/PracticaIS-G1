@@ -55,7 +55,7 @@ if createModelButton or (st.session_state.modelCreated):
 if loadModelButton or st.session_state.modelLoaded:
     # Allow the user to upload a model file
     st.session_state.modelLoaded = True
-    uploaded_file = st.file_uploader("Cargar archivo .pkl", type=["pkl", "pickle"])
+    uploaded_file = st.sidebar.file_uploader("Cargar archivo .pkl", type=["pkl", "pickle"])
     if uploaded_file is not None:
         try:
             # Load the model from the uploaded file
