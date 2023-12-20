@@ -1,5 +1,9 @@
+from sklearn.linear_model import LinearRegression
 import streamlit as st
+import pandas as pd
+from class_customModelo import CustomModelo
 import pickle
+
 
 
 def save_object(path, obj):
@@ -11,7 +15,7 @@ def save_object(path, obj):
     with open(path, "wb") as f:
         pickle.dump(obj, f)
 
-def downloadButton(model):
+def downloadButton(modelo):
 
     """
     input = modelo
@@ -19,11 +23,12 @@ def downloadButton(model):
     salida = None
     """
     #intenta guardar el modelo en un archivo auxiliar,
+    
     #y después procede a guardar una copia del documento en la carpeta de descargas.
     try:
-        save_object("model_to_save.pickle", model)
+        save_object("model_to_save.pickle", modelo)
         with open("model_to_save.pickle", "rb") as file:
-            st.download_button(
+            st.sidebar.download_button(
                     label="Descargar modelo",
                     data=file,
                     file_name="model.pickle",

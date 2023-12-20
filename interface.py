@@ -14,6 +14,7 @@ import modelos as m
 import showError as e
 import prediction as p
 import pickle
+from class_customModelo import CustomModelo
 
 st.header("Training and prediction of linear regression models")
 st.title("Linear regression tool")
@@ -34,6 +35,8 @@ if 'model' not in st.session_state:
     st.session_state.model = None
 if 'modelCreated' not in st.session_state:
     st.session_state.modelCreated = False
+if 'modelLoaded' not in st.session_state:
+    st.session_state.modelLoaded = False
 
 
             
@@ -42,19 +45,24 @@ if createModelButton or (st.session_state.modelCreated):
     st.session_state.model = m.crearModelo(data,x,y)
     st.session_state.modelCreated = True
     modelo = st.session_state.model
-    p.prediction(modelo, x)
-    downloadButton(st.session_state.model)
-    e.showError(st.session_state.model, data[x], data[y]) # maybe x should be equal to data[x] 
+    modelo.set_data(x, y)
+    p.prediction(modelo)
+    downloadButton(modelo)
+    e.showError(modelo, data[x], data[y]) # maybe x should be equal to data[x] 
 
 
 
-if loadModelButton:
+if loadModelButton or st.session_state.modelLoaded:
     # Allow the user to upload a model file
-    uploaded_file = st.file_uploader("Cargar archivo .pkl", type=["pkl"])
+    st.session_state.modelLoaded = True
+    uploaded_file = st.file_uploader("Cargar archivo .pkl", type=["pkl", "pickle"])
     if uploaded_file is not None:
-        # Load the model from the uploaded file
-        st.session_state.model = pickle.load(uploaded_file)
-        st.session_state.modelCreated = True
+        try:
+            # Load the model from the uploaded file
+            modelo = pickle.load(uploaded_file)
+            p.prediction(modelo)
+        except Exception as e:
+            st.error("An error ocurred while loading file: " + str(e))
 
     
 

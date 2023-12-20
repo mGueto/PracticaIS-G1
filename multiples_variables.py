@@ -1,6 +1,7 @@
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import streamlit as st
+from class_customModelo import CustomModelo
 
 # very slow (create a new model for each variable), improvable
 
@@ -11,7 +12,7 @@ def modelo_regresion_multiple(columnas_X, columna_Y):
     y = columna_Y
     
     # Entrenar el modelo de regresión
-    modelo = LinearRegression()
+    modelo = CustomModelo()
     modelo.fit(X, y)
     coeficientes = modelo.coef_
     intercepto = modelo.intercept_
