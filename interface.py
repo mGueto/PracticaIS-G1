@@ -46,8 +46,8 @@ if createModelButton or (st.session_state.modelCreated):
     st.session_state.modelCreated = True
     modelo = st.session_state.model
     modelo.set_data(x, y)
-    p.prediction(modelo)
     downloadButton(modelo)
+    p.prediction(modelo)
     e.showError(modelo, data[x], data[y]) # maybe x should be equal to data[x] 
 
 
