@@ -20,16 +20,26 @@ from loadModel import loadModel
 st.header("Training and prediction of linear regression models")
 st.title("Linear regression tool")
 
+# Allow the user to upload a model file
+st.sidebar.header("Cargar modelo")
+uploaded_file = st.sidebar.file_uploader("Cargar modelo archivo .pkl", type=["pkl", "pickle"])
+if uploaded_file is not None:
+    try:
+        # Load the model from the uploaded file
+        st.session_state.modelLoaded = True
+        modelo = pickle.load(uploaded_file)
+        p.prediction(modelo)
+    except Exception as e:
+        st.error("An error ocurred while loading file: " + str(e))
 
-st.sidebar.header("Options")
+st.sidebar.header("Cargar datos")
 
 data = leer_archivos()
 x , y = s.seleccion_columnas(data)
 
 
-# buttons displayed in the interface
+# buttons displayed after uploading data
 createModelButton = st.sidebar.button("Crear y visualizar modelo") 
-loadModelButton = st.sidebar.button("Cargar modelo") 
 
 
 if 'model' not in st.session_state:
@@ -50,13 +60,3 @@ if createModelButton or (st.session_state.modelCreated):
     downloadButton(modelo)
     p.prediction(modelo)
     e.showError(modelo, data[x], data[y]) # maybe x should be equal to data[x] 
-
-
-
-if loadModelButton or st.session_state.modelLoaded:
-    # Allow the user to upload a model file
-    loadModel()
-
-    
-
-
