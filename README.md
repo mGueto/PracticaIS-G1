@@ -119,7 +119,7 @@ After creating a model, you can save it for future use. To do this:
 
 To load a file into the application:
 
-1. Open [Your Application Name].
+1. Open the application.
 2. Navigate to the left sidebar.
 3. Click on the "Load File" option.
 4. Choose the file you want to analyze and click "Open."
