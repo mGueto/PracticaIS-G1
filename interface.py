@@ -15,6 +15,7 @@ import showError as e
 import prediction as p
 import pickle
 from class_customModelo import CustomModelo
+from loadModel import loadModel
 
 st.header("Training and prediction of linear regression models")
 st.title("Linear regression tool")
@@ -54,15 +55,7 @@ if createModelButton or (st.session_state.modelCreated):
 
 if loadModelButton or st.session_state.modelLoaded:
     # Allow the user to upload a model file
-    st.session_state.modelLoaded = True
-    uploaded_file = st.sidebar.file_uploader("Cargar archivo .pkl", type=["pkl", "pickle"])
-    if uploaded_file is not None:
-        try:
-            # Load the model from the uploaded file
-            modelo = pickle.load(uploaded_file)
-            p.prediction(modelo)
-        except Exception as e:
-            st.error("An error ocurred while loading file: " + str(e))
+    loadModel()
 
     
 
