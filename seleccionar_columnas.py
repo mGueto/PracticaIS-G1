@@ -23,7 +23,6 @@ def seleccion_columnas(data):
         x = st.sidebar.multiselect("Variables independientes", numeric_columns) 
         # Select the dependet variable
         y = st.sidebar.selectbox("Variable objetivo", numeric_columns) 
-    
-        return x, y
+        return x, y, False
 
     

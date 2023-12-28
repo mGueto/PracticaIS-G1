@@ -49,7 +49,7 @@ data = leer_archivos()
 
 # The file must be loaded for variables to be selected.
 if data is not None:
-    x, y = s.seleccion_columnas(data)
+    x, y, st.session_state.modelCreated = s.seleccion_columnas(data)
 
     # There must be variables selected for the 'Create Model' button to be displayed.
     if len(x)>0:
