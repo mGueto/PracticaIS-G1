@@ -4,8 +4,6 @@ import streamlit as st
 
 def seleccion_columnas(data):
 
-    if data is not None:
-
         ### Check for numeric columns
         numeric_columns = select_columns(data)
 
@@ -26,6 +24,6 @@ def seleccion_columnas(data):
         # Select the dependet variable
         y = st.sidebar.selectbox("Variable objetivo", numeric_columns) 
     
-    return x, y
+        return x, y
 
     

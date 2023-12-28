@@ -17,6 +17,18 @@ import pickle
 from class_customModelo import CustomModelo
 from loadModel import loadModel
 
+
+
+
+if 'model' not in st.session_state:
+    st.session_state.model = None
+if 'modelCreated' not in st.session_state:
+    st.session_state.modelCreated = False
+if 'modelLoaded' not in st.session_state:
+    st.session_state.modelLoaded = False
+
+
+
 st.header("Training and prediction of linear regression models")
 st.title("Linear regression tool")
 
@@ -33,30 +45,23 @@ if uploaded_file is not None:
         st.error("An error ocurred while loading file: " + str(e))
 
 st.sidebar.header("Cargar datos")
-
 data = leer_archivos()
-x , y = s.seleccion_columnas(data)
 
+# The file must be loaded for variables to be selected.
+if data is not None:
+    x, y = s.seleccion_columnas(data)
 
-# buttons displayed after uploading data
-createModelButton = st.sidebar.button("Crear y visualizar modelo") 
-
-
-if 'model' not in st.session_state:
-    st.session_state.model = None
-if 'modelCreated' not in st.session_state:
-    st.session_state.modelCreated = False
-if 'modelLoaded' not in st.session_state:
-    st.session_state.modelLoaded = False
-
-
-            
-
-if createModelButton or (st.session_state.modelCreated):
-    st.session_state.model = m.crearModelo(data,x,y)
-    st.session_state.modelCreated = True
-    modelo = st.session_state.model
-    modelo.set_data(x, y)
-    downloadButton(modelo)
-    p.prediction(modelo)
-    e.showError(modelo, data[x], data[y]) # maybe x should be equal to data[x] 
+    # There must be variables selected for the 'Create Model' button to be displayed.
+    if len(x)>0:
+    
+        # buttons displayed after uploading data
+        createModelButton = st.sidebar.button("Crear y visualizar modelo")
+        
+        if createModelButton or (st.session_state.modelCreated):
+            st.session_state.model = m.crearModelo(data,x,y)
+            st.session_state.modelCreated = True
+            modelo = st.session_state.model
+            modelo.set_data(x, y)
+            downloadButton(modelo)
+            p.prediction(modelo)
+            e.showError(modelo, data[x], data[y]) # maybe x should be equal to data[x] 

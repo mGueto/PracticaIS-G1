@@ -13,7 +13,6 @@ import streamlit as st
 
 def leer_archivos():
     uploaded_file = st.sidebar.file_uploader("Cargar archivo (csv, xlsx, db, sqlite)", type=["csv", "xlsx", "db", "sqlite"]) 
-    st.write("filename:", uploaded_file.name)
     data = None # Al principio definimos las variables que se irán modificando para que la 
     #aplicación no de errores al intentar comparar valores que no existen.
 
