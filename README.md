@@ -1,46 +1,8 @@
+
+
+
+
 # Practica IS | Grupo 1
-
-## Overview
-
-This application is designed to assist you in creating, visualizing, saving, and loading linear regression models. You can work with data stored in CSV and Excel files, databases and model saved previously by the application. The application also enables you to make predictions using the trained models.
-
-## Code Style and Conventions
-
-When contributing to this Application, you must follow this code style and conventions:
-
-**Programming Language:**
-   - Python
-   
-
-**Naming Conventions:**
-   - Use camelCase for variable and function names.
-
- **Documentation:**
-   - Include clear and concise comments within the code for better understanding using '#'.
-   - Provide docstrings for functions to explain their purpose, input and output.
-
- **Language:**
-   - Use English for the code and comments.
-   - Use Spanish for the elements displayed in the GUI and the documentation files.
-
-
-## App installation
-
-Esto es una aplicación web, por lo que no es necesario una instalación interna en tu equipo. 
-Sin embargo, si quieres explorar y abrir la aplicación, deberás de tener instalado un entorno de desarrollo integrado en tu ordenador para poder ejecutar los programas correspondientes.
-
-## Libraries Required
-
-Para la satisfactoria ejecución de la aplicación, debe de tener instaladas una serie de librerías:
-
-- Streamlit
-- Pandas
-- Sklearn
-- Matplotlib
-
-
-
-# User Manual for [Practica IS]
 
 ## Table of Contents
 
@@ -71,17 +33,17 @@ This application is designed to assist you in creating, visualizing, saving, and
 
 ### 2.1 System Requirements
 
-Before using the application, ensure that your system meets the following requirements:
+This is a web application, so there is no need for an internal installation on your computer. 
+However, if you want to browse and open the application, you must have an integrated development environment installed on your computer and the necessary libraries to be able to run the corresponding programs.
 
-- [System Requirement 1]
-- [System Requirement 2]
-- ...
+### 2.2 Installation<a name="installation"></a>
 
-### 2.2 Installation
+To install the following libraries, you must execute this command in the development environment terminal [pip install 'library'].
 
-1. [Installation Step 1]
-2. [Installation Step 2]
-3. ...
+- Streamlit
+- Pandas
+- sklearn
+- Matplotlib
 
 ## 3. User Interface
 
