@@ -1,28 +1,22 @@
-
-
-
-
 # Practica IS | Grupo 1
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Getting Started](#getting-started)
-   - [System Requirements](#system-requirements)
-   - [Installation](#installation)
-3. [User Interface](#user-interface)
-   - [Main Interface](#main-interface)
-   - [Variable Selection](#variable-selection)
-   - [Model Creation](#model-creation)
-   - [Save and Load Models](#save-and-load-models)
-4. [Usage Instructions](#usage-instructions)
-   - [Loading a File](#loading-a-file)
-   - [Selecting Variables](#selecting-variables)
-   - [Model Creation and Prediction](#model-creation-and-prediction)
-   - [Saving and Loading Models](#saving-and-loading-models)
-5. [Troubleshooting](#troubleshooting)
-6. [Support and Feedback](#support-and-feedback)
-7. [Conclusion](#conclusion)
+1. Introduction
+2. Getting Started
+   - System Requirements
+   - Installation
+3. User Interface
+   - Main Interface
+   - Variable Selection
+   - Model Creation
+   - Save and Load Models
+4. Usage Instructions
+   - Loading a File
+   - Selecting Variables
+   - Model Creation and Prediction
+   - Saving and Loading Models
+     
 
 ## 1. Introduction
 
@@ -49,7 +43,7 @@ To install the following libraries, you must execute this command in the develop
 
 ### 3.1 Main Interface
 
-The main interface consists of a left sidebar where you can access all functions offered by the application.
+The main interface consists of a left sidebar where you can access all functions offered by the application
 
 ### 3.2 Variable Selection
 
@@ -104,6 +98,8 @@ To load a file into the application:
 
 1. After creating a model, click on "Save Model" to save it for future use.
 2. To load a saved model, click on "Load Model" and select the appropriate file.
+
+
 
 
 
