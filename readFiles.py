@@ -1,7 +1,6 @@
 from readFile import _readCSV, _readExcel, _readSQL
 from columns import *
-from regresionSimple import regresionSimpleModel
-from regresionMultiple import *
+from regresionModels import *
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt

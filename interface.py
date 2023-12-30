@@ -3,8 +3,7 @@ from readFiles import *
 import selectColumns as s
 from columns import *
 from class_customModel import CustomModel
-from regresionSimple import regresionSimpleModel
-from regresionMultiple import *
+from regresionModels import *
 from loadModel import loadModel
 from saveModel import downloadButton
 from sklearn.metrics import mean_squared_error

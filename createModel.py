@@ -1,8 +1,7 @@
 from readFile import *
-from regresionSimple import regresionSimpleModel
+from regresionModels import *
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-from regresionMultiple import *
 import matplotlib.pyplot as plt
 import subprocess
 from readFiles import *
