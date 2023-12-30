@@ -1,6 +1,7 @@
 from readFiles import *
 import readFiles as l
 import streamlit as st
+import pandas as pd
 
 def selectionColumns(data):
 
@@ -25,4 +26,12 @@ def selectionColumns(data):
         y = st.sidebar.selectbox("Variable objetivo", numeric_columns) 
         return x, y, False
 
-    
+
+def selectColumns(df: pd.DataFrame) -> tuple:
+    """Input:
+    df: DataFrame
+        Output:
+    numCols: pandas.Index"""
+    numCols = df.select_dtypes(include=['int64', 'float64']).columns
+    print(type(numCols))
+    return numCols
