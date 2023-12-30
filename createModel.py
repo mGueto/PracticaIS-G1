@@ -1,5 +1,4 @@
-from regresionSimple import *
-from regresionMultiple import *
+from regresionModels import *
 import streamlit as st
 
 
