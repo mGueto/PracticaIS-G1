@@ -1,16 +1,7 @@
 from readFile import *
 from readFiles import *
 import selectColumns as s
-from columns import *
-from class_customModel import CustomModel
-from regresionSimple import regresionSimpleModel
-from regresionMultiple import *
-from loadModel import loadModel
 from saveModel import downloadButton
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
-import matplotlib.pyplot as plt
-import subprocess
 import streamlit as st
 import createModel as m
 import showError as e

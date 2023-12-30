@@ -1,15 +1,6 @@
 from readFile import _readCSV, _readExcel, _readSQL
 from columns import *
-from regresionSimple import regresionSimpleModel
-from regresionMultiple import *
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
-import matplotlib.pyplot as plt
-import subprocess
-import prediction as p
-import pickle
 
-import streamlit as st
 
 #Las funciones internas son privadas ya que solo se usan dentro de esa función
 def ReadFiles(uploaded_file):

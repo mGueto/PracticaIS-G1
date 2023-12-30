@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import streamlit as st
+
 def plotModel(modelo, columnX, columnY):
     if columnX.shape[1] == 1:
         x, y = columnX.values, columnY.values

@@ -1,15 +1,8 @@
-from readFile import *
-from regresionSimple import regresionSimpleModel
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
+from regresionSimple import *
 from regresionMultiple import *
-import matplotlib.pyplot as plt
-import subprocess
-from readFiles import *
-import readFiles as l
 import streamlit as st
-from selectColumns import *
-import selectColumns as s
+
+
 
 def createModel(data, x, y):
 

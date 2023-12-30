@@ -1,6 +1,3 @@
-from sklearn.linear_model import LinearRegression
-import matplotlib.pyplot as plt
-import streamlit as st
 from class_customModel import CustomModel
 
 # very slow (create a new model for each variable), improvable
