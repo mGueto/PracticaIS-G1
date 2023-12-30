@@ -42,7 +42,7 @@ if uploaded_file is not None:
 
 
 if data is not None:    # The file must be loaded for variables to be selected
-    x, y, st.session_state.modelCreated = s.selectionColumns(data)
+    x, y, st.session_state.modelCreated = s.selection_columns(data)
     st.write(x)
     st.write(y)
 
