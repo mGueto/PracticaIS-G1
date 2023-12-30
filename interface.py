@@ -1,8 +1,7 @@
 from readFiles import *
 import selectColumns as s
-from regresionModels import *
 import streamlit as st
-from ModelOperations import downloadButton, createModel
+from modelOperations import *
 import showError as e
 import prediction as p
 import pickle
@@ -54,13 +53,13 @@ if data is not None:    # The file must be loaded for variables to be selected
         create_model_button = st.sidebar.button("Crear y visualizar modelo")
         
         if create_model_button or (st.session_state.modelCreated):
-            st.session_state.model = createModel(data,x,y) 
+            st.session_state.model = create_model(data,x,y) 
         
         if st.session_state.model is not None:
             model = st.session_state.model
             data_x, data_y = data[x], data[y]
-            pm.plotModel(model, data_x, data_y) 
+            pm.plot_model(model, data_x, data_y) 
             model.set_data(x, y)
-            downloadButton(model)
+            download_button(model)
             p.prediction(model)
-            e.showError(model, data_x, data_y)  
+            e.show_error(model, data_x, data_y)  

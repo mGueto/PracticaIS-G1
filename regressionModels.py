@@ -1,4 +1,4 @@
-from class_customModel import CustomModel
+from classCustomModel import CustomModel
 
 def simple_regression_model(column_x, column_y):
     x = column_x.values

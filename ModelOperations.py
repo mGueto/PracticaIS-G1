@@ -1,4 +1,4 @@
-from regresionModels import *
+from regressionModels import *
 from readFiles import *
 import streamlit as st
 from selectColumns import *
