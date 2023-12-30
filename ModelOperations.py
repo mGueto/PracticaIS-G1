@@ -1,67 +1,43 @@
 from regresionModels import *
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
-import matplotlib.pyplot as plt
-import subprocess
 from readFiles import *
-import readFiles as l
 import streamlit as st
 from selectColumns import *
-import selectColumns as s
 import pickle
-from class_customModel import CustomModel
-import pandas as pd
-from sklearn.linear_model import LinearRegression
 
-def createModel(data, x, y):
+def create_model(data, x, y):
 
-        X_mediana = data[x].median()
-        Y_mediana = data[y].median()
-        data[x] = data[x].fillna(X_mediana)
-        data[y] = data[y].fillna(Y_mediana)
+        median_x = data[x].median()
+        median_y = data[y].median()
+        data[x] = data[x].fillna(median_x)
+        data[y] = data[y].fillna(median_y)
         x, y = data[x], data[y]
         
         if x.shape[1] == 1:
-            modelo = regresionSimpleModel(x, y)
+            model = simple_regression_model(x, y)
             
 
             
         else:
-            modelo = regresionMultipleModel(x, y)
+            model = multiple_regression_model(x, y)
             
 
         
-        st.write(modelo)
-        return modelo   
+        st.write(model)
+        return model  
 
-def saveObject(path, obj):
-    """
-    input:
-    path = extensión de donde guardar
-    obj = objeto a guardar
-    """
+def save_object(path, obj):
     with open(path, "wb") as f:
         pickle.dump(obj, f)
 
-def downloadButton(modelo):
-
-    """
-    input = modelo
-
-    salida = None
-    """
-    #intenta guardar el modelo en un archivo auxiliar,
-    
-    #y después procede a guardar una copia del documento en la carpeta de descargas.
+def download_button(model):
     try:
-        saveObject("model_to_save.pickle", modelo)
+        save_object("model_to_save.pickle", model)
         with open("model_to_save.pickle", "rb") as file:
-
             if st.sidebar.download_button(
-                    label="Descargar modelo",
-                    data=file,
-                    file_name="model.pickle",
-                    mime="pickle/pickle"):
+                    label = "Descargar modelo",
+                    data = file,
+                    file_name = "model.pickle",
+                    mime = "pickle/pickle"):
                 st.sidebar.write("Se ha guardado correctamente el modelo. ¡Revise descargas!")
     except:
         st.write("¡Error! No se puedo guardar el modelo")

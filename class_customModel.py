@@ -2,7 +2,7 @@ from sklearn.linear_model import LinearRegression
 from pandas import *
 
 class CustomModel(LinearRegression):
-    def __init__(self, X_columns=None, y_columns=None):
+    def __init__(self, X_columns = None, y_columns = None):
         super().__init__()
         self.X_columns = X_columns
         self.y_columns = y_columns

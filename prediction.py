@@ -1,28 +1,27 @@
 import streamlit as st
 import pandas as pd
-from sklearn.linear_model import LinearRegression
 
-def prediction(modelo):
-    if len(modelo.X_columns) == 1:
+def prediction(model):
+    if len(model.X_columns) == 1:
     
 
-        valor_prediccion = st.sidebar.number_input(f"Ingrese un valor para {modelo.X_columns[0]}")
-        prediccion = modelo.predict([[valor_prediccion]])
+        prediction_value = st.sidebar.number_input(f"Ingrese un valor para {model.X_columns[0]}")
+        prediction = model.predict([[prediction_value]])
         st.sidebar.subheader("Resultado de la Predicción:")
-        st.sidebar.write(f"Predicción para {modelo.y_columns}: {prediccion[0]}")
+        st.sidebar.write(f"Predicción para {model.y_columns}: {prediction[0]}")
     
     else:
         st.sidebar.subheader("Predicción multiple")
-        valor_prediccion = {}
+        prediction_value = {}
 
-        for columna in modelo.X_columns[:]:
-            valor = st.sidebar.number_input(f"Ingrese un valor para {columna}")
-            valor_prediccion[columna] = valor
+        for column in model.X_columns[:]:
+            value = st.sidebar.number_input(f"Ingrese un valor para {column}")
+            prediction_value[column] = value
 
         # Convierte el diccionario de valores a un DataFrame para la predicción
-        input_data = pd.DataFrame([valor_prediccion])
-        prediccion = modelo.predict(input_data)
+        input_data = pd.DataFrame([prediction_value])
+        prediction = model.predict(input_data)
 
         st.sidebar.subheader("Resultado de la Predicción:")
-        st.sidebar.write(f"Predicción para {modelo.y_columns}: {prediccion[0]}")
+        st.sidebar.write(f"Predicción para {model.y_columns}: {prediction[0]}")
 

@@ -1,22 +1,17 @@
 from class_customModel import CustomModel
 
-def regresionSimpleModel(columnaX, columnaY):
-    x = columnaX.values
-    y = columnaY.values
-    modelo = CustomModel()
-    modelo.fit(x, y)
-    return modelo
+def simple_regression_model(column_x, column_y):
+    x = column_x.values
+    y = column_y.values
+    model = CustomModel()
+    model.fit(x, y)
+    return model
 
-# very slow (create a new model for each variable), improvable
-
-def regresionMultipleModel(columnas_X, columna_Y):
-    # Tomar un subconjunto más pequeño de los datos
-
-    X = columnas_X
-    y = columna_Y
+def multiple_regression_model(columns_x, column_Y):
+    x = columns_x
+    y = column_Y 
     
-    # Entrenar el modelo de regresión
-    modelo = CustomModel()
-    modelo.fit(X, y)
+    model = CustomModel()   # Training
+    model.fit(x, y)
     
-    return modelo
+    return model

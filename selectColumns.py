@@ -1,37 +1,21 @@
 from readFiles import *
-import readFiles as l
 import streamlit as st
 import pandas as pd
 
-def selectionColumns(data):
+def selection_columns(data):
+    numeric_columns = select_columns(data)      # Check for numeric columns
 
-        ### Check for numeric columns
-        numeric_columns = selectColumns(data)
+    st.write("Primeros registros del conjunto de datos:")
+    st.write(data.head())   # Header of the dataframe is shown
 
-        # Se utiliza SimpleImputer de scikit-learn para imputar la media en las columnas numéricas del DataFrame donde haya valores nulos (sustituye los NULL por la media númerica, solo en las variables numericas)
-        """imputer = SimpleImputer(strategy='median')
-        data[numeric_columns] = imputer.fit_transform(data[numeric_columns])"""
-
-        # Se muestran los primeros registros del conjunto de datos después de la imputación de la media.
-        ## Show
-        st.write("Primeros registros del conjunto de datos:")
-        st.write(data.head())
-
-        # In the sidebar, the user selects the independent variables and the target variable.
-        ## Variable selection
-        st.sidebar.subheader("Seleccione las variables independientes y la variable objetivo:")
-        # Is allowed to use one or more independent variables, to make simple or multiple lineal regression
-        x = st.sidebar.multiselect("Variables independientes", numeric_columns) 
-        # Select the dependet variable
-        y = st.sidebar.selectbox("Variable objetivo", numeric_columns) 
-        return x, y, False
+    st.sidebar.subheader("Seleccione las variables independientes y la variable objetivo:") # In the sidebar, the user selects the independent variables and the target variable
+    x = st.sidebar.multiselect("Variables independientes", numeric_columns) # Is allowed to use one or more independent variables, to make simple or multiple lineal regression
+    y = st.sidebar.selectbox("Variable objetivo", numeric_columns)  # Select the dependet variable
+    
+    return x, y, False
 
 
-def selectColumns(df: pd.DataFrame) -> tuple:
-    """Input:
-    df: DataFrame
-        Output:
-    numCols: pandas.Index"""
-    numCols = df.select_dtypes(include=['int64', 'float64']).columns
-    print(type(numCols))
-    return numCols
+def select_columns(df) -> tuple:
+    num_cols = df.select_dtypes(include=['int64', 'float64']).columns
+    
+    return num_cols
