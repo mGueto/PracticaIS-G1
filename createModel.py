@@ -1,17 +1,17 @@
-from read_files import *
-from regresion_simple import modelo_regresion_simple
+from readFile import *
+from regresionSimple import regresionSimpleModel
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-from multiples_variables import *
+from regresionMultiple import *
 import matplotlib.pyplot as plt
 import subprocess
-from leer_archivos import *
-import leer_archivos as l
+from readFiles import *
+import readFiles as l
 import streamlit as st
-from seleccionar_columnas import *
-import seleccionar_columnas as s
+from selectColumns import *
+import selectColumns as s
 
-def crearModelo(data, x, y):
+def createModel(data, x, y):
 
         X_mediana = data[x].median()
         Y_mediana = data[y].median()
@@ -20,14 +20,14 @@ def crearModelo(data, x, y):
         x, y = data[x], data[y]
         
         if x.shape[1] == 1:
-            modelo = modelo_regresion_simple(x, y)
+            modelo = regresionSimpleModel(x, y)
             
 
             
         else:
-            modelo = modelo_regresion_multiple(x, y)
+            modelo = regresionMultipleModel(x, y)
             
 
         
-
+        st.write(modelo)
         return modelo   

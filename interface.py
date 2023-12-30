@@ -1,21 +1,21 @@
-from read_files import *
+from readFile import *
+from readFiles import *
+import selectColumns as s
 from columns import *
-from regresion_simple import modelo_regresion_simple
+from class_customModel import CustomModel
+from regresionSimple import regresionSimpleModel
+from regresionMultiple import *
+from loadModel import loadModel
+from saveModel import downloadButton
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-from multiples_variables import *
 import matplotlib.pyplot as plt
 import subprocess
-from save_models import downloadButton
-from leer_archivos import *
 import streamlit as st
-import seleccionar_columnas as s
-import modelos as m
+import createModel as m
 import showError as e
 import prediction as p
 import pickle
-from class_customModelo import CustomModelo
-from loadModel import loadModel
 
 
 
@@ -35,6 +35,7 @@ st.title("Linear regression tool")
 # Allow the user to upload a model file
 st.sidebar.header("Cargar modelo")
 uploaded_file = st.sidebar.file_uploader("Cargar modelo archivo .pkl", type=["pkl", "pickle"])
+
 if uploaded_file is not None:
     try:
         # Load the model from the uploaded file
@@ -44,12 +45,22 @@ if uploaded_file is not None:
     except Exception as e:
         st.error("An error ocurred while loading file: " + str(e))
 
+#________________________________________________________________________________________________________________________________________________________________________________________________
 st.sidebar.header("Cargar datos")
-data = leer_archivos()
+data = None # Al principio definimos las variables que se irán modificando para que la
+uploaded_file = st.sidebar.file_uploader("Cargar archivo (csv, xlsx, db, sqlite)", type=["csv", "xlsx", "db", "sqlite"])
+st.write(uploaded_file)
+if uploaded_file is not None:
+    try:
+        data = ReadFiles(uploaded_file)
+    except Exception as e:
+        st.error("An error ocurred while loading file: " + str(e))
 
 # The file must be loaded for variables to be selected.
 if data is not None:
-    x, y, st.session_state.modelCreated = s.seleccion_columnas(data)
+    x, y, st.session_state.modelCreated = s.selectionColumns(data)
+    st.write(x)
+    st.write(y)
 
     # There must be variables selected for the 'Create Model' button to be displayed.
     if len(x)>0:
@@ -58,7 +69,7 @@ if data is not None:
         createModelButton = st.sidebar.button("Crear y visualizar modelo")
         
         if createModelButton or (st.session_state.modelCreated):
-            st.session_state.model = m.crearModelo(data,x,y)
+            st.session_state.model = m.createModel(data,x,y)
             st.session_state.modelCreated = True
             modelo = st.session_state.model
             modelo.set_data(x, y)

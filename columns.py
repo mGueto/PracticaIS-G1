@@ -1,7 +1,6 @@
 import pandas as pd
-from read_files import *
 
-def select_columns(df: pd.DataFrame) -> tuple:
+def selectColumns(df: pd.DataFrame) -> tuple:
     """Input:
     df: DataFrame
         Output:

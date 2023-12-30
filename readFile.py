@@ -4,21 +4,23 @@ from contextlib import contextmanager
 from pathlib import Path
 from uuid import uuid4
 
-def readCSV(path:str) -> pd.DataFrame:
+#Métodos 'privados' de la función readFiles()
+
+def _readCSV(path:str) -> pd.DataFrame:
     """Input: 
     path: CSV file path
        Output: 
     Pandas dataframe """
     return pd.read_csv(path)
 
-def readExcel(path:str) -> pd.DataFrame:
+def _readExcel(path:str) -> pd.DataFrame:
     """Input: 
     path: excel file path
        Output: 
     Pandas dataframe """
     return pd.read_excel(path)
 
-def readSQL(uploaded_file) -> pd.DataFrame:
+def _readSQL(uploaded_file) -> pd.DataFrame:
     """Input: 
     path: db file path
        Output: 

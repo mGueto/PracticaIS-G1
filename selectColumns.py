@@ -1,11 +1,11 @@
-from leer_archivos import *
-import leer_archivos as l
+from readFiles import *
+import readFiles as l
 import streamlit as st
 
-def seleccion_columnas(data):
+def selectionColumns(data):
 
         ### Check for numeric columns
-        numeric_columns = select_columns(data)
+        numeric_columns = selectColumns(data)
 
         # Se utiliza SimpleImputer de scikit-learn para imputar la media en las columnas numéricas del DataFrame donde haya valores nulos (sustituye los NULL por la media númerica, solo en las variables numericas)
         """imputer = SimpleImputer(strategy='median')
