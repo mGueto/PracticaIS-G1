@@ -1,7 +1,7 @@
 from readFiles import *
 import selectColumns as s
 import streamlit as st
-from modelOperations import *
+from ModelOperations import *
 import showError as e
 import prediction as p
 import pickle
