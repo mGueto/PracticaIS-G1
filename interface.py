@@ -1,9 +1,8 @@
-from readFile import *
 from readFiles import *
 import selectColumns as s
-from saveModel import downloadButton
+from class_customModel import CustomModel
+from ModelOperations import *
 import streamlit as st
-import createModel as m
 import showError as e
 import prediction as p
 import pickle
@@ -60,7 +59,7 @@ if data is not None:
         createModelButton = st.sidebar.button("Crear y visualizar modelo")
         
         if createModelButton or (st.session_state.modelCreated):
-            st.session_state.model = m.createModel(data,x,y) 
+            st.session_state.model = createModel(data,x,y) 
         if st.session_state.model is not None:
             modelo = st.session_state.model
             dataX, dataY = data[x], data[y]
