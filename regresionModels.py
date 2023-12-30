@@ -1,7 +1,11 @@
-from sklearn.linear_model import LinearRegression
-import matplotlib.pyplot as plt
-import streamlit as st
 from class_customModel import CustomModel
+
+def regresionSimpleModel(columnaX, columnaY):
+    x = columnaX.values
+    y = columnaY.values
+    modelo = CustomModel()
+    modelo.fit(x, y)
+    return modelo
 
 # very slow (create a new model for each variable), improvable
 
