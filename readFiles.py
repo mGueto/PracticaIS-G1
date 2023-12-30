@@ -1,4 +1,3 @@
-from readFile import _readCSV, _readExcel, _readSQL
 from regresionModels import *
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
@@ -7,7 +6,6 @@ import subprocess
 import prediction as p
 import pickle
 import streamlit as st
-
 import pandas as pd
 import sqlite3 as sql
 from contextlib import contextmanager

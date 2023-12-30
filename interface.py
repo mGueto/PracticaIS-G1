@@ -1,7 +1,5 @@
-from readFile import *
 from readFiles import *
 import selectColumns as s
-from columns import *
 from class_customModel import CustomModel
 from regresionModels import *
 from sklearn.metrics import mean_squared_error
