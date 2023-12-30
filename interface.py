@@ -16,7 +16,7 @@ import createModel as m
 import showError as e
 import prediction as p
 import pickle
-
+import plotModel as pm
 
 
 
@@ -69,9 +69,10 @@ if data is not None:
         createModelButton = st.sidebar.button("Crear y visualizar modelo")
         
         if createModelButton or (st.session_state.modelCreated):
-            st.session_state.model = m.createModel(data,x,y)
-            st.session_state.modelCreated = True
+            st.session_state.model = m.createModel(data,x,y) # this function must ONLY create a model. not plot it
+        if st.session_state.model is not None:
             modelo = st.session_state.model
+            pm.plotModel(modelo, data[x], data[y]) 
             modelo.set_data(x, y)
             downloadButton(modelo)
             p.prediction(modelo)
