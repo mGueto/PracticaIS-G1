@@ -53,7 +53,7 @@ if data is not None:    # The file must be loaded for variables to be selected
         create_model_button = st.sidebar.button("Crear y visualizar modelo")
         
         if create_model_button or (st.session_state.modelCreated):
-            st.session_state.model = create_model(data,x,y) 
+            st.session_state.model = create_model(data, x, y) 
         
         if st.session_state.model is not None:
             model = st.session_state.model
