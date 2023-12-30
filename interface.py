@@ -69,11 +69,12 @@ if data is not None:
         createModelButton = st.sidebar.button("Crear y visualizar modelo")
         
         if createModelButton or (st.session_state.modelCreated):
-            st.session_state.model = m.createModel(data,x,y) # this function must ONLY create a model. not plot it
+            st.session_state.model = m.createModel(data,x,y) 
         if st.session_state.model is not None:
             modelo = st.session_state.model
-            pm.plotModel(modelo, data[x], data[y]) 
+            dataX, dataY = data[x], data[y]
+            pm.plotModel(modelo, dataX, dataY) 
             modelo.set_data(x, y)
             downloadButton(modelo)
             p.prediction(modelo)
-            e.showError(modelo, data[x], data[y]) # maybe x should be equal to data[x] 
+            e.showError(modelo, dataX, dataY)  
