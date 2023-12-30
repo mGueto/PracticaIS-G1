@@ -4,14 +4,12 @@ import selectColumns as s
 from columns import *
 from class_customModel import CustomModel
 from regresionModels import *
-from loadModel import loadModel
-from saveModel import downloadButton
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 import subprocess
 import streamlit as st
-import createModel as m
+from ModelOperations import downloadButton, createModel
 import showError as e
 import prediction as p
 import pickle
@@ -68,7 +66,7 @@ if data is not None:
         createModelButton = st.sidebar.button("Crear y visualizar modelo")
         
         if createModelButton or (st.session_state.modelCreated):
-            st.session_state.model = m.createModel(data,x,y) 
+            st.session_state.model = createModel(data,x,y) 
         if st.session_state.model is not None:
             modelo = st.session_state.model
             dataX, dataY = data[x], data[y]
