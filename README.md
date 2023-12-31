@@ -20,7 +20,7 @@
 
 ## 1. Introduction
 
-This application is designed to assist you in creating, visualizing, saving, and loading linear regression models. You can work with data stored in CSV and Excel files, databases and model saved previously by the application. The application also enables you to make predictions using the trained models.
+This application is designed to assist you in creating, visualizing, saving, and loading simple and multiple linear regression models. You can work with data stored in CSV and Excel files, databases and model saved previously by the application. The application also enables you to make predictions using the trained models.
 
 
 ## 2. Getting Started
@@ -43,7 +43,7 @@ To install the following libraries, you must execute this command in the develop
 
 ### 3.1 Main Interface
 
-The main interface consists of a left sidebar where you can access all functions offered by the application
+The main interface consists of a left sidebar where you can access all functions offered by the application and a content area in which the information related to the functions performed is displayed.
 
 ### 3.2 Variable Selection
 
@@ -52,17 +52,17 @@ To analyze your data effectively, follow these steps:
 1. **Load a File:** [Instructions for Loading a File - Refer to Section 4.1]
 2. **Select Variables:** [Instructions for Selecting Variables - Refer to Section 4.2]
 
-### 3.3 Model Creation
+### 3.3 Model Creation and Visualization
 
 Create a predictive model using the selected variables:
 
-1. **Model Creation:** [Instructions for Model Creation - Refer to Section 4.3]
+1. **Model Creation and Visualization:** [Instructions for Model Creation - Refer to Section 4.3]
 
 ### 3.4 Save and Load Models
 
 After creating a model, you can save it for future use. To do this:
 
-1. In the left sidebar, click on "Save Model."
+1. In the left sidebar, click on "Download Model."
 2. Choose a location to save the model file.
 3. To load a previously saved model:
    - Click on "Load Model" in the left sidebar.
@@ -79,23 +79,24 @@ To load a file into the application:
 2. Navigate to the left sidebar.
 3. Click on the "Load File" option.
 4. Choose the file you want to analyze and click "Open."
+5. Display of the first data of the file in the content area.
 
 ### 4.2 Selecting Variables
 
 1. After loading a file, go to the left sidebar.
 2. Click on "Variable Selection."
 3. Choose the variables of interest from the available options.
-4. Confirm your selection.
 
 ### 4.3 Model Creation and Prediction
 
 1. With variables selected, go to the left sidebar.
-2. Click on "Model Creation."
-3. Follow the prompts to create a model based on your selected variables.
-4. Once the model is created, you can use it to make predictions.
+2. Click on "Model Creation and Visualization."
+3. Display of prediction operation in left sidebar.
+4. Display of the regression graphs display.
+5. Once the model is created, you can use it to make predictions.
 
 ### 4.4 Saving and Loading Models
 
 1. After creating a model, click on "Save Model" to save it for future use.
 2. To load a saved model, click on "Load Model" and select the appropriate file.
-... (9 líneas restantes)
+3. Display of prediction operation in left sidebar.
