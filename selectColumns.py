@@ -1,9 +1,13 @@
 from readFiles import *
 import streamlit as st
 import pandas as pd
+from sklearn.impute import SimpleImputer
 
 def selection_columns(data):
     numeric_columns = select_columns(data)      # Check for numeric columns
+
+    imputer = SimpleImputer(strategy = 'median')
+    data[numeric_columns] = imputer.fit_transform(data[numeric_columns])
 
     st.write("Primeros registros del conjunto de datos:")
     st.write(data.head())   # Header of the dataframe is shown
