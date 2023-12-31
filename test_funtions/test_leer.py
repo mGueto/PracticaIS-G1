@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from leer_archivos import leer_archivos
+from readFiles import read_files
 
 class TestLeerArchivos(unittest.TestCase):
     def setUp(self):
@@ -13,7 +13,7 @@ class TestLeerArchivos(unittest.TestCase):
         uploaded_file = MagicMock(name="test_data/housing.csv")
         uploaded_file.name.endswith.return_value = True
         with unittest.mock.patch('leer_archivos.readCSV', self.mock_csv_reader):
-            result = leer_archivos(uploaded_file)
+            result = read_files(uploaded_file)
         self.mock_csv_reader.assert_called_once_with(uploaded_file)
         # Aquí verifica que la función devuelva lo esperado
 
