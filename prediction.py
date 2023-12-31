@@ -8,7 +8,7 @@ def prediction(model):
         prediction_value = st.sidebar.number_input(f"Ingrese un valor para {model.columns_x[0]}")
         prediction = model.predict([[prediction_value]])
         st.sidebar.subheader("Resultado de la Predicción:")
-        st.sidebar.write(f"Predicción para {model.y_columns}: {prediction[0]}")
+        st.sidebar.write(f"Predicción para {model.columns_y}: {prediction[0]}")
     
     else:
         st.sidebar.subheader("Predicción multiple")
@@ -23,5 +23,5 @@ def prediction(model):
         prediction = model.predict(input_data)
 
         st.sidebar.subheader("Resultado de la Predicción:")
-        st.sidebar.write(f"Predicción para {model.y_columns}: {prediction[0]}")
+        st.sidebar.write(f"Predicción para {model.columns_y}: {prediction[0]}")
 
