@@ -1,6 +1,5 @@
 import pandas as pd
-import pytest
-from seleccionar_columnas import seleccion_columnas
+from selectColumns import selection_columns
 
 def test_seleccion_columnas():
     # Crea un DataFrame de prueba
@@ -11,7 +10,7 @@ def test_seleccion_columnas():
     })
 
     # Llama a la función
-    x, y = seleccion_columnas(data)
+    x, y = selection_columns(data)
 
     # Realiza tus aserciones
     assert isinstance(x, list)

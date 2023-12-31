@@ -1,6 +1,5 @@
 from readFiles import *
 import streamlit as st
-import pandas as pd
 from sklearn.impute import SimpleImputer
 
 def selection_columns(data):
